@@ -31,6 +31,7 @@ public class SwingHelper {
 
 			UIManager.put("Label.font", font);
 			UIManager.put("Button.font", font);
+			UIManager.put("EditorPane.font", font);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

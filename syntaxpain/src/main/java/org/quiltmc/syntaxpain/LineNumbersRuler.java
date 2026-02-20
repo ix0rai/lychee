@@ -154,7 +154,7 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 		if (force || this.lastDigits != digits) {
 			this.lastDigits = digits;
 			this.numbersFormat = "%" + digits + "d";
-			FontMetrics fontMetrics = this.getFontMetrics(this.getFont());
+			FontMetrics fontMetrics = this.getFontMetrics(SyntaxStyle.FONT);
 			int width = fontMetrics.charWidth('0') * digits;
 			Insets insets = this.getInsets();
 			int preferredWidth = insets.left + insets.right + width;
@@ -173,7 +173,7 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		final FontMetrics fontMetrics = this.getFontMetrics(this.getFont());
+		final FontMetrics fontMetrics = this.getFontMetrics(SyntaxStyle.FONT);
 		final Insets insets = this.getInsets();
 		final int currentLine = getLineNumber(this.editor, this.editor.getCaretPosition());
 

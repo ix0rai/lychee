@@ -20,7 +20,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.io.InputStream;
-import javax.swing.UIManager;
 import javax.swing.text.Segment;
 import javax.swing.text.TabExpander;
 import javax.swing.text.Utilities;
@@ -33,10 +32,10 @@ import javax.swing.text.Utilities;
  */
 public record SyntaxStyle(Color color, int fontStyle) {
 	// todo hack, duplicated font
-	private static Font font;
+	public static final Font FONT;
 	static {
 		try (InputStream is = SyntaxStyle.class.getResourceAsStream("/jbmono.ttf")) {
-			font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
+			FONT = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -55,7 +54,7 @@ public record SyntaxStyle(Color color, int fontStyle) {
 	 * @param startOffset - starting offset of the text in the document &gt;= 0
 	 */
 	public float drawText(Segment segment, float x, float y, Graphics2D graphics, TabExpander e, int startOffset) {
-		graphics.setFont(font.deriveFont(this.fontStyle()));
+		graphics.setFont(FONT.deriveFont(this.fontStyle()));
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 		int a = fontMetrics.getAscent();
 		int h = a + fontMetrics.getDescent();

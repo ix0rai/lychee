@@ -29,8 +29,8 @@ public class LycheeFrame extends JFrame {
 	public static int HEIGHT = 600;
 	public static int WIDTH = 1400;
 
-	private final CodePanel codePanel = new CodePanel();
 	private final DrawingPanel drawingPanel = new DrawingPanel();
+	private final CodePanel codePanel = new CodePanel(drawingPanel);
 
 	public void init() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
