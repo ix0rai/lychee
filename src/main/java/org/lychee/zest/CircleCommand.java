@@ -1,6 +1,8 @@
 package org.lychee.zest;
 
-import java.awt.Graphics2D;
+import org.lychee.gui.LycheeColors;
+
+import java.awt.*;
 
 public class CircleCommand extends Command {
     private final Coordinate start;
@@ -15,6 +17,9 @@ public class CircleCommand extends Command {
 
     @Override
     public Shape execute(Graphics2D graphics) {
+        graphics.setColor(LycheeColors.RED);
+        graphics.setStroke(new BasicStroke(width));
+        graphics.drawOval(start.getX(), start.getY(), end.getX(), end.getY());
         return null;
     }
 

@@ -12,8 +12,6 @@ public class Main {
 		SwingHelper.fixSwing();
 		LycheeFrame frame = new LycheeFrame();
 		frame.init();
-//		LycheeFrame frame = new LycheeFrame();
-//		frame.init();
 		ZestParser parse = new ZestParser();
 		List<Command> commands = parse.parseFile("testing.txt");
 		frame.updateCommands(commands);
