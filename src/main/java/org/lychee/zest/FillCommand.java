@@ -21,4 +21,8 @@ public class FillCommand extends Command {
 		graphics.fillRect(start.getX(), start.getY(), width, height);
 		return null;
 	}
+
+	public String toString() {
+		return start + " | " + width + " | " + height;
+	}
 }

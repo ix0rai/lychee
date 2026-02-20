@@ -51,10 +51,10 @@ public class ZestParser {
 			case "circle":
 				String[] circleArgs = parameters.split(",");
 				Coordinate circleStart = (Coordinate) parseArgument(circleArgs[0]);
-				Coordinate circleEnd = (Coordinate) parseArgument(circleArgs[1]);
-				int circleWidth = (int) parseArgument(circleArgs[2]);
+				int circleWidth = (int) parseArgument(circleArgs[1]);
+				int circleHeight = (int) parseArgument(circleArgs[2]);
 
-				command = new CircleCommand(circleStart, circleEnd, circleWidth);
+				command = new CircleCommand(circleStart, circleWidth, circleHeight);
 				break;
 			default:
 				System.out.println("Something went wrong!");
