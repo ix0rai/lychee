@@ -1,5 +1,7 @@
 package org.lychee.zest;
 
+import org.lychee.gui.LycheeColors;
+
 import java.awt.Graphics2D;
 
 public class LineCommand extends Command {
@@ -15,7 +17,8 @@ public class LineCommand extends Command {
 
 	@Override
 	public Shape execute(Graphics2D graphics) {
-		// use parameters to draw the line. worry about this later
+		graphics.setColor(LycheeColors.RED);
+		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
 		return null;
 	}
 

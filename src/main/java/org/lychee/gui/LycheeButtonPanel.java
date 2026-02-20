@@ -1,7 +1,6 @@
 package org.lychee.gui;
 
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;

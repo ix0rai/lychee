@@ -1,8 +1,8 @@
 package org.lychee.zest;
 
 public class Coordinate {
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 
 	public Coordinate(int x, int y) {
 		this.x = x;
@@ -18,6 +18,14 @@ public class Coordinate {
 		int x = Integer.parseInt(coords[0]);
 		int y = Integer.parseInt(coords[1]);
 		return new Coordinate(x, y);
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 	public String toString() {

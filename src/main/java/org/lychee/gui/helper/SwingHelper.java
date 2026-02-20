@@ -15,7 +15,7 @@ import static java.awt.RenderingHints.*;
 public class SwingHelper {
 	public static void fixSwing() {
 		try (InputStream is = SwingHelper.class.getResourceAsStream("/jbmono.ttf")) {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 
 			UIManager.put("Label.font", font);
 			UIManager.put("Button.font", font);

@@ -79,7 +79,7 @@ public class ZestParser {
 		return arg.substring(1, arg.length() - 1);
 	}
 
-	public void parseFile(String filename) {
+	public ArrayList<Command> parseFile(String filename) {
 		try {
 			Scanner scnr = new Scanner(new FileReader(filename));
 			while (scnr.hasNextLine()) {
@@ -94,5 +94,7 @@ public class ZestParser {
 		} catch(IOException io) {
 			System.out.println("Something went wrong!");
 		}
+
+		return commands;
 	}
 }
