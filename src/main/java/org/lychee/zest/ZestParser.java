@@ -16,62 +16,67 @@ public class ZestParser {
 	public Command parseCommand(String line) {
 		String[] newLine = line.trim().split("\\(");
 		String commandName = newLine[0];
-		String parameters = newLine[1];
+		// todo make this better -- the substring removes the );
+		String parameters = newLine[1].substring(0, newLine[1].length() - 2);
 
 		ArrayList<Integer> array = new ArrayList<>();
-		Coordinate start;
-		Coordinate end;
-		int width;
 
 		Command command = null;
 
 		switch (commandName) {
 			case "line":
-				for (int i = 0; i < parameters.length(); i++) {
-					if (Character.isDigit(parameters.charAt(i))) {
-						int num = Integer.parseInt(parameters.substring(i, i+1));
-						array.add(num);
-					}
-				}
-				start = new Coordinate(array.get(0), array.get(1));
-				end = new Coordinate(array.get(2), array.get(3));
-				width = array.get(4);
+				String[] args = parameters.split(",");
+				Coordinate lineStart = (Coordinate) parseArgument(args[0]);
+				Coordinate lineEnd = (Coordinate) parseArgument(args[1]);
+				int lineWidth = (int) parseArgument(args[2]);
 
-				command = new LineCommand(start, end, width);
+				command = new LineCommand(lineStart, lineEnd, lineWidth);
 				break;
 			case "erase":
-				for (int i = 0; i < parameters.length(); i++) {
-					if (Character.isDigit(parameters.charAt(i))) {
-						int num = Integer.parseInt(parameters.substring(i, i+1));
-						array.add(num);
-					}
-				}
-				start = new Coordinate(array.get(0), array.get(1));
-				end = new Coordinate(array.get(2), array.get(3));
-				width = array.get(4);
+				String[] eraseArgs = parameters.split(",");
+				Coordinate eraseStart = (Coordinate) parseArgument(eraseArgs[0]);
+				Coordinate eraseEnd = (Coordinate) parseArgument(eraseArgs[1]);
+				int eraseWidth = (int) parseArgument(eraseArgs[2]);
 
-				command = new EraseCommand(start, end, width);
+				command = new EraseCommand(eraseStart, eraseEnd, eraseWidth);
 				break;
 			case "fill":
 				break;
 			case "circle":
-				for (int i = 0; i < parameters.length(); i++) {
-					if (Character.isDigit(parameters.charAt(i))) {
-						int num = Integer.parseInt(parameters.substring(i, i+1));
-						array.add(num);
-					}
-				}
-				start = new Coordinate(array.get(0), array.get(1));
-				end = new Coordinate(array.get(2), array.get(3));
-				width = array.get(4);
-
-				command = new CircleCommand(start, end, width);
+//				for (int i = 0; i < parameters.length(); i++) {
+//					if (Character.isDigit(parameters.charAt(i))) {
+//						int num = Integer.parseInt(parameters.substring(i, i+1));
+//						array.add(num);
+//					}
+//				}
+//				Coordinate lineStart = new Coordinate(array.get(0), array.get(1));
+//				Coordinate lineEnd = new Coordinate(array.get(2), array.get(3));
+//				Coordinate lineWidth = array.get(4);
+//
+//				command = new CircleCommand(lineStart, lineEnd, lineWidth);
 				break;
 			default:
 				System.out.println("Something went wrong!");
 				break;
 		}
+
 		return command;
+	}
+
+	public Object parseArgument(String arg) {
+		arg = arg.trim();
+		if (arg.startsWith("[") && arg.endsWith("]")) {
+			return Coordinate.parse(arg);
+		} else if (arg.startsWith("\"") && arg.endsWith("\"")) {
+			return parseString(arg);
+		} else {
+			// assume int
+			return Integer.parseInt(arg);
+		}
+	}
+
+	public String parseString(String arg) {
+		return arg.substring(1, arg.length() - 1);
 	}
 
 	public void parseFile(String filename) {
