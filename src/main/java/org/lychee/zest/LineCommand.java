@@ -24,6 +24,6 @@ public class LineCommand extends Command {
 	}
 
 	public String toString() {
-		return start + " | " + end + " | " + width;
+		return "line: " + start + " | " + end + " | " + width;
 	}
 }

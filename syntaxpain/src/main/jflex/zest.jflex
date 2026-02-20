@@ -23,7 +23,7 @@ import org.quiltmc.syntaxpain.DefaultJFlexLexer;
 
 %no_suppress_warnings
 %public
-%class JavaLexer
+%class ZestLexer
 %extends DefaultJFlexLexer
 %final
 %unicode
@@ -35,7 +35,7 @@ import org.quiltmc.syntaxpain.DefaultJFlexLexer;
      * Create an empty lexer, yyrset will be called later to reset and assign
      * the reader
      */
-    public JavaLexer() {
+    public ZestLexer() {
         super();
     }
 

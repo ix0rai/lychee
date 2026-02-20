@@ -13,7 +13,7 @@ public class ZestParser {
 		commands = new ArrayList<>();
 	}
 
-	public Command parseCommand(String line) {
+	public static Command parseCommand(String line) {
 		String[] newLine = line.trim().split("\\(");
 		String commandName = newLine[0];
 		// todo make this better -- the substring removes the );
@@ -61,7 +61,7 @@ public class ZestParser {
 		return command;
 	}
 
-	public Object parseArgument(String arg) {
+	public static Object parseArgument(String arg) {
 		arg = arg.trim();
 		if (arg.startsWith("[") && arg.endsWith("]")) {
 			return Coordinate.parse(arg);
@@ -73,8 +73,24 @@ public class ZestParser {
 		}
 	}
 
-	public String parseString(String arg) {
+	public static String parseString(String arg) {
 		return arg.substring(1, arg.length() - 1);
+	}
+
+	public static ArrayList<Command> parseFromString(String code) {
+		ArrayList<Command> commands = new ArrayList<>();
+
+		Scanner scnr = new Scanner(code);
+		while (scnr.hasNextLine()) {
+			String line = scnr.nextLine();
+			if (line.endsWith(";")) {
+				commands.add(parseCommand(line));
+				System.out.println("Added!");
+			}
+		}
+		System.out.println(commands);
+		scnr.close();
+		return commands;
 	}
 
 	public ArrayList<Command> parseFile(String filename) {

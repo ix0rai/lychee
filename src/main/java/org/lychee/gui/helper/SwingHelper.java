@@ -1,7 +1,11 @@
 package org.lychee.gui.helper;
 
 
+import org.lychee.gui.LycheeColors;
+import org.quiltmc.syntaxpain.ZestSyntaxKit;
+
 import javax.imageio.ImageIO;
+import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -21,6 +25,7 @@ public class SwingHelper {
 			throw new RuntimeException(e);
 		}
 
+		// todo duplicated in syntaxpain
 		try (InputStream is = SwingHelper.class.getResourceAsStream("/jbmono.ttf")) {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 
@@ -29,6 +34,20 @@ public class SwingHelper {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
+		JEditorPane.registerEditorKitForContentType("text/zest-sources", ZestSyntaxKit.class.getName());
+		ZestSyntaxKit.setSyntaxColors(
+				LycheeColors.PINK,
+				LycheeColors.PINK,
+				LycheeColors.PINK,
+				LycheeColors.WHITE,
+				LycheeColors.WHITE,
+				LycheeColors.WHITE,
+				LycheeColors.WHITE,
+				LycheeColors.PINK,
+				LycheeColors.WHITE,
+				LycheeColors.PINK
+		);
 
 		// enable a bunch of nice things that are off by default for legacy compat
 		// use hardware accel if possible

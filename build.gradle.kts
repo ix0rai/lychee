@@ -15,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.quiltmc:syntaxpain:internal")
     implementation("com.google.guava:guava:33.5.0-jre")
     implementation("org.jspecify:jspecify:1.0.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))

@@ -15,7 +15,7 @@
 
 package org.quiltmc.syntaxpain;
 
-import org.quiltmc.syntaxpain.generated.JavaLexer;
+import org.quiltmc.syntaxpain.generated.ZestLexer;
 
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Document;
@@ -24,8 +24,8 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 import java.awt.Color;
 
-public class JavaSyntaxKit extends DefaultEditorKit implements ViewFactory {
-	public static final String CONTENT_TYPE = "text/enigma-sources";
+public class ZestSyntaxKit extends DefaultEditorKit implements ViewFactory {
+	public static final String CONTENT_TYPE = "text/zest-sources";
 
 	private static SyntaxStyleMap styles = new SyntaxStyleMap(
 		new Color(0x3333EE),
@@ -52,10 +52,10 @@ public class JavaSyntaxKit extends DefaultEditorKit implements ViewFactory {
 
 	private final Lexer lexer;
 
-	public JavaSyntaxKit() {
+	public ZestSyntaxKit() {
 		super();
 		// JavaLexer is generated automagically by jflex based on the java.jflex file
-		this.lexer = new JavaLexer();
+		this.lexer = new ZestLexer();
 	}
 
 	@Override
