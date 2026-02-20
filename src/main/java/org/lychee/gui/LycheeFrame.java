@@ -27,7 +27,7 @@ public class LycheeFrame extends JFrame {
 	}
 
 	public static int HEIGHT = 600;
-	public static int WIDTH = 1400;
+	public static int WIDTH = 1000;
 
 	private final DrawingPanel drawingPanel = new DrawingPanel();
 	private final CodePanel codePanel = new CodePanel(drawingPanel);
