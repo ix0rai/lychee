@@ -2,6 +2,7 @@ package org.lychee.gui;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Insets;
 
 public class LycheeButton extends JButton {
 	public LycheeButton(String text) {
@@ -10,6 +11,6 @@ public class LycheeButton extends JButton {
 		label.setForeground(LycheeColors.WHITE);
 		this.add(label);
 
-		this.setBackground(LycheeColors.DARK_RED);
+		this.setBackground(LycheeColors.BROWN);
 	}
 }

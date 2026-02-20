@@ -2,6 +2,7 @@ package org.lychee.zest;
 
 import org.lychee.gui.LycheeColors;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 public class LineCommand extends Command {

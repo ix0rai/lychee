@@ -31,8 +31,8 @@ public class LycheeFrame extends JFrame {
 
 		FlexGridConstraints.Absolute buttonPanelConstraints = FlexGridConstraints.createAbsolute().extent(1, 1);
 
-		this.add(new LycheeButtonPanel(CodePanel.WIDTH), buttonPanelConstraints.pos(0, 0));
-		this.add(new LycheeButtonPanel(DrawingPanel.WIDTH), buttonPanelConstraints.pos(1, 9));
+		this.add(new LeftButtonPanel(), buttonPanelConstraints.pos(0, 0));
+		this.add(new RightButtonPanel(), buttonPanelConstraints.pos(1, 9));
 
 
 		contentPane.setBackground(LycheeColors.PINK);
