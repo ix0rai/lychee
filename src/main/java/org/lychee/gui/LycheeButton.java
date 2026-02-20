@@ -5,4 +5,8 @@ import org.lychee.zest.Command;
 import javax.swing.JButton;
 
 public class LycheeButton extends JButton {
+	public LycheeButton(String text) {
+		super(text);
+		this.setBackground(LycheeColors.DARK_RED);
+	}
 }

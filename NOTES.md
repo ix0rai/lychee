@@ -57,6 +57,12 @@ image: </path/to/image.png>
 }
 ```
 
+line [0, 0], [100, 100] 5
+switch (name) {
+    casse "line" {
+        new LineCommand(parameters)
+        list.add(command)
+
 ```java
 class Command {
 	public void execute(Parameters params) {
