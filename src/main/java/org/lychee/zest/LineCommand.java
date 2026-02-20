@@ -18,4 +18,8 @@ public class LineCommand extends Command {
 		// use parameters to draw the line. worry about this later
 		return null;
 	}
+
+	public String toString() {
+		return start + " | " + end + " | " + width;
+	}
 }
