@@ -10,7 +10,7 @@ public class Coordinate {
 	}
 
 	public static Coordinate parse(String coordinateString) {
-		// coordinates are represented by [x, y]
+		// coordinates are represented by [x:y]
 		// trim off []
 		coordinateString = coordinateString.substring(1, coordinateString.length() - 1);
 
