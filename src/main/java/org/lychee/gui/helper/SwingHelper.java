@@ -14,6 +14,13 @@ import static java.awt.RenderingHints.*;
 
 public class SwingHelper {
 	public static void fixSwing() {
+		try {
+			// fix macos being busted
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
 		try (InputStream is = SwingHelper.class.getResourceAsStream("/jbmono.ttf")) {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 
