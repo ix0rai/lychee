@@ -5,6 +5,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Dimension;
 
 public abstract class LycheePanel extends JPanel {
+	public static int BORDER_WEIGHT = 10;
+
 	private final int minWidth;
 	private final int minHeight;
 
@@ -15,8 +17,15 @@ public abstract class LycheePanel extends JPanel {
 	private final int maxHeight;
 
 	protected LycheePanel(int minWidth, int minHeight,
+						  int preferredWidth, int preferredHeight,
+						  int maxWidth, int maxHeight
+	) {
+		this(minWidth, minHeight, preferredWidth, preferredHeight, maxWidth, maxHeight, true);
+	}
+
+	protected LycheePanel(int minWidth, int minHeight,
 			int preferredWidth, int preferredHeight,
-			int maxWidth, int maxHeight
+			int maxWidth, int maxHeight, boolean border
 	) {
 		this.minWidth = minWidth;
 		this.minHeight = minHeight;
@@ -27,7 +36,9 @@ public abstract class LycheePanel extends JPanel {
 		this.maxWidth = maxWidth;
 		this.maxHeight = maxHeight;
 
-		this.setBorder(new LineBorder(LycheeColors.PINK, 10));
+		if (border) {
+			this.setBorder(new LineBorder(LycheeColors.PINK, BORDER_WEIGHT));
+		}
 	}
 
 	@Override

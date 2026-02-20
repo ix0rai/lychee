@@ -34,7 +34,6 @@ public class LycheeFrame extends JFrame {
 		this.add(new LeftButtonPanel(), buttonPanelConstraints.pos(0, 0));
 		this.add(new RightButtonPanel(), buttonPanelConstraints.pos(1, 9));
 
-
 		contentPane.setBackground(LycheeColors.PINK);
 
 		this.setVisible(true);
