@@ -6,18 +6,19 @@ import java.awt.*;
 
 public class FillCommand extends Command {
 	private final Coordinate start;
-	private final Coordinate end;
+	private final int width;
+	private final int height;
 
-	public FillCommand(Coordinate start, Coordinate end) {
+	public FillCommand(Coordinate start, int width, int height) {
 		this.start = start;
-		this.end = end;
+		this.width = width;
+		this.height = height;
 	}
 
 	@Override
 	public Shape execute(Graphics2D graphics) {
 		graphics.setColor(LycheeColors.RED);
-		graphics.fillRect(start.getX(), start.getY(), end.getX(), end.getY());
-		System.out.println("executed");
+		graphics.fillRect(start.getX(), start.getY(), width, height);
 		return null;
 	}
 }

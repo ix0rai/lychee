@@ -1,6 +1,6 @@
 package org.lychee.zest;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class EraseCommand extends Command {
 	private final Coordinate start;
@@ -15,6 +15,9 @@ public class EraseCommand extends Command {
 
 	@Override
 	public Shape execute(Graphics2D graphics) {
+		graphics.setColor(graphics.getBackground());
+		graphics.setStroke(new BasicStroke(width));
+		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
 		return null;
 	}
 
