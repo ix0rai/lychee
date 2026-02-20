@@ -1,5 +1,7 @@
 package org.lychee.zest;
 
+import java.awt.event.MouseEvent;
+
 public class Coordinate {
 	private final int x;
 	private final int y;

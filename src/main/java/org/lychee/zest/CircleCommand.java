@@ -6,24 +6,24 @@ import java.awt.*;
 
 public class CircleCommand extends Command {
     private final Coordinate start;
-    private final Coordinate end;
     private final int width;
+    private final int height;
 
-    public CircleCommand(Coordinate start, Coordinate end, int width) {
+    public CircleCommand(Coordinate start, int width, int height) {
         this.start = start;
-        this.end = end;
         this.width = width;
+        this.height = height;
     }
 
     @Override
     public Shape execute(Graphics2D graphics) {
         graphics.setColor(LycheeColors.RED);
         graphics.setStroke(new BasicStroke(width));
-        graphics.drawOval(start.getX(), start.getY(), end.getX(), end.getY());
+        graphics.drawOval(start.getX(), start.getY(), width, height);
         return null;
     }
 
     public String toString() {
-        return start + " | " + end + " | " + width;
+        return start + " | " + width + " | " + height;
     }
 }
