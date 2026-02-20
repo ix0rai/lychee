@@ -26,16 +26,7 @@ public class RightButtonPanel extends LycheeButtonPanel {
 
 		JPanel rightButtons = new JPanel(new FlexGridLayout());
 		rightButtons.setOpaque(false);
-		JLabel label = new JLabel();
-		try {
-			Image image = ImageIO.read(new File("lychee.png")); // todo fragile image loading
-			Icon icon = new ImageIcon(image);
-			label.setIcon(icon);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-
-		rightButtons.add(label);
+		rightButtons.add(new JLabel(LycheeFrame.ICON));
 		rightButtons.add(new LycheeButton("lychee."));
 		this.add(rightButtons, BorderLayout.EAST);
 	}

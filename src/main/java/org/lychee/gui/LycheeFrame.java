@@ -4,11 +4,28 @@ import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.gui.flex_grid.constraints.FlexGridConstraints;
 import org.lychee.zest.Command;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Container;
+import java.awt.Image;
+import java.io.File;
 import java.util.List;
 
 public class LycheeFrame extends JFrame {
+	public static Image ICON_IMAGE;
+	public static Icon ICON;
+
+	static {
+		try {
+			ICON_IMAGE = ImageIO.read(new File("lychee.png")); // todo fragile image loading
+			ICON = new ImageIcon(ICON_IMAGE);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public static int HEIGHT = 600;
 	public static int WIDTH = 1400;
 
@@ -37,7 +54,7 @@ public class LycheeFrame extends JFrame {
 		contentPane.setBackground(LycheeColors.PINK);
 
 		this.setVisible(true);
-		//this.setIconImage(null) // todo pretty icon
+		this.setIconImage(ICON_IMAGE);
 	}
 
 	public void updateCommands(List<Command> commands) {
