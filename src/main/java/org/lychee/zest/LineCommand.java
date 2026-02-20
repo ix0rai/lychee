@@ -2,8 +2,7 @@ package org.lychee.zest;
 
 import org.lychee.gui.LycheeColors;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class LineCommand extends Command {
 	private final Coordinate start;
@@ -19,6 +18,7 @@ public class LineCommand extends Command {
 	@Override
 	public Shape execute(Graphics2D graphics) {
 		graphics.setColor(LycheeColors.RED);
+		graphics.setStroke(new BasicStroke(width));
 		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
 		return null;
 	}

@@ -41,7 +41,11 @@ public class ZestParser {
 				command = new EraseCommand(eraseStart, eraseEnd, eraseWidth);
 				break;
 			case "fill":
-				break;
+				String[] fillArgs = parameters.split(",");
+				Coordinate fillStart = (Coordinate) parseArgument(fillArgs[0]);
+				Coordinate fillEnd = (Coordinate) parseArgument(fillArgs[1]);
+
+				command = new FillCommand(fillStart, fillEnd);
 			case "circle":
 				String[] circleArgs = parameters.split(",");
 				Coordinate circleStart = (Coordinate) parseArgument(circleArgs[0]);
@@ -54,7 +58,6 @@ public class ZestParser {
 				System.out.println("Something went wrong!");
 				break;
 		}
-
 		return command;
 	}
 
@@ -79,7 +82,7 @@ public class ZestParser {
 			Scanner scnr = new Scanner(new FileReader(filename));
 			while (scnr.hasNextLine()) {
 				String line = scnr.nextLine();
-				if (line.contains(";")) {
+				if (line.endsWith(";")) {
 					commands.add(parseCommand(line));
 					System.out.println("Added!");
 				}
@@ -89,7 +92,6 @@ public class ZestParser {
 		} catch(IOException io) {
 			System.out.println("Something went wrong!");
 		}
-
 		return commands;
 	}
 }
