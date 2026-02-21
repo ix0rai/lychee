@@ -19,8 +19,6 @@ public class ZestParser {
 		// todo make this better -- the substring removes the );
 		String parameters = newLine[1].substring(0, newLine[1].length() - 2);
 
-		ArrayList<Integer> array = new ArrayList<>();
-
 		Command command = null;
 
 		switch (commandName) {
