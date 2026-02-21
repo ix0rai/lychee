@@ -1,9 +1,14 @@
 package org.lychee.gui;
 
+import com.google.common.graph.Graph;
 import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.zest.Command;
+import org.lychee.zest.LineError;
+import org.lychee.zest.Result;
 
+import javax.swing.JEditorPane;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -19,6 +24,9 @@ public class DrawingPanel extends LycheePanel {
 
 	private final LycheeFrame frame;
 	private List<Command> commands = new ArrayList<>();
+	private List<LineError> errors = new ArrayList<>();
+
+	private final JEditorPane editorPane = new JEditorPane();
 	private final CanvasPanel canvas = new CanvasPanel();
 
 	public DrawingPanel(LycheeFrame frame) {
@@ -27,11 +35,30 @@ public class DrawingPanel extends LycheePanel {
 
 		this.setBackground(LycheeColors.PINK);
 		this.setLayout(new FlexGridLayout());
-		this.add(canvas);
+
+		this.editorPane.setBackground(LycheeColors.WHITE);
+		this.editorPane.setEditable(false);
+		this.editorPane.setForeground(LycheeColors.RED);
+		this.editorPane.setPreferredSize(new Dimension(CanvasPanel.WIDTH, CanvasPanel.HEIGHT));
 	}
 
-	public void setCommands(List<Command> commands) {
-		this.commands = commands;
+	public void setCommands(List<Result<Command, LineError>> commands) {
+		this.commands = commands.stream().filter(Result::isOk).map(Result::unwrap).toList();
+		this.errors = commands.stream().filter(Result::isErr).map(Result::unwrapErr).toList();
+
+		this.removeAll();
+		if (this.errors.isEmpty()) {
+			this.add(canvas);
+		} else {
+			StringBuilder sb = new StringBuilder();
+			for (LineError error : errors) {
+				sb.append(error.toString()).append("\n");
+			}
+			this.editorPane.setText(sb.toString());
+			this.add(editorPane);
+		}
+
+		this.revalidate();
 		this.repaint();
 	}
 
@@ -59,8 +86,9 @@ public class DrawingPanel extends LycheePanel {
 		@Override
 		public void paint(Graphics graphics) {
 			super.paint(graphics);
-			for (Command command : commands) {
-				if (command != null) {
+
+			if (errors.isEmpty()) {
+				for (Command command : commands) {
 					command.execute((Graphics2D) graphics);
 				}
 			}

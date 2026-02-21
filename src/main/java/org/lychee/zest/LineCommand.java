@@ -3,6 +3,7 @@ package org.lychee.zest;
 import com.google.common.collect.ImmutableSortedMap;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Map;
 
 public class LineCommand extends Command {
@@ -26,12 +27,12 @@ public class LineCommand extends Command {
 		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
 	}
 
-	public static Map<String, Argument<?>> getArguments() {
-		return ImmutableSortedMap.of(
-				"start", Argument.COORDINATE,
-				"end", Argument.COORDINATE,
-				"width", Argument.INT,
-				"color", Argument.COLOR
+	public static List<Pair<String, Argument<?>>> getArguments() {
+		return List.of(
+				new Pair<>("start", Argument.COORDINATE),
+				new Pair<>("end", Argument.COORDINATE),
+				new Pair<>("width", Argument.INT),
+				new Pair<>("color", Argument.COLOR)
 		);
 	}
 

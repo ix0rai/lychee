@@ -4,6 +4,7 @@ import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.zest.ZestParser;
 
 import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,6 +22,7 @@ public class CodePanel extends LycheePanel {
 		this.setLayout(new FlexGridLayout());
 
 		this.drawingPanel = panel;
+		JScrollPane scrollPane = new JScrollPane(editor);
 		this.editor = editor;
 		this.editor.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.editor.setBackground(LycheeColors.DARK_RED);
@@ -30,16 +32,16 @@ public class CodePanel extends LycheePanel {
 		editor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				//panel.setCommands(ZestParser.parseFromString(editor.getText()));
+				reloadCode();
 			}
 		});
 
-		this.add(editor);
+		this.add(scrollPane);
 
 	}
 
 	public void reloadCode() {
-		//drawingPanel.setCommands(ZestParser.parseFromString(editor.getText()));
+		drawingPanel.setCommands(ZestParser.parseFromString(editor.getText()));
 	}
 
 	public void setCode(String code) {
