@@ -132,6 +132,9 @@ SingleCharacter = [^\r\n\'\\]
   {FloatLiteral}                 |
   {DoubleLiteral}                |
   {DoubleLiteral}[dD]            { return token(TokenType.NUMBER); }
+
+    /* comments */
+    {Comment}                      { return token(TokenType.COMMENT); }
 }
 
 
