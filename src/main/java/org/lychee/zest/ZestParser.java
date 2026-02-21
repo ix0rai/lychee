@@ -27,8 +27,12 @@ public class ZestParser {
 				Coordinate lineStart = (Coordinate) parseArgument(args[0]);
 				Coordinate lineEnd = (Coordinate) parseArgument(args[1]);
 				int lineWidth = (int) parseArgument(args[2]);
-
-				command = new LineCommand(lineStart, lineEnd, lineWidth);
+				if (args.length == 4) {
+					String color = (String) parseArgument(args[3]);
+					command = new LineCommand(lineStart, lineEnd, lineWidth, color);
+				} else {
+					command = new LineCommand(lineStart, lineEnd, lineWidth);
+				}
 				break;
 			case "erase":
 				String[] eraseArgs = parameters.split(",");
@@ -43,16 +47,24 @@ public class ZestParser {
 				Coordinate fillStart = (Coordinate) parseArgument(fillArgs[0]);
 				int fillWidth = (int) parseArgument(fillArgs[1]);
 				int fillHeight = (int) parseArgument(fillArgs[2]);
-
-				command = new FillCommand(fillStart, fillWidth, fillHeight);
+				if (fillArgs.length == 4) {
+					String color = (String) parseArgument(fillArgs[3]);
+					command = new FillCommand(fillStart, fillWidth, fillHeight, color);
+				} else {
+					command = new FillCommand(fillStart, fillWidth, fillHeight);
+				}
 				break;
 			case "circle":
 				String[] circleArgs = parameters.split(",");
 				Coordinate circleStart = (Coordinate) parseArgument(circleArgs[0]);
 				int circleWidth = (int) parseArgument(circleArgs[1]);
 				int circleHeight = (int) parseArgument(circleArgs[2]);
-
-				command = new CircleCommand(circleStart, circleWidth, circleHeight);
+				if (circleArgs.length == 4) {
+					String color = (String) parseArgument(circleArgs[3]);
+					command = new CircleCommand(circleStart, circleWidth, circleHeight, color);
+				} else {
+					command = new CircleCommand(circleStart, circleWidth, circleHeight);
+				}
 				break;
 			default:
 				System.out.println("Something went wrong!");
