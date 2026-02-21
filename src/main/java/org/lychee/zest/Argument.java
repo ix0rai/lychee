@@ -17,7 +17,6 @@ public class Argument<P> {
 
 	public static final Argument<String> STRING = new Argument<>("string", (str, name, line) -> {
 		// "string", "example string", "lalala"
-		// todo handle errors
 		try {
 			return Result.ok(str.substring(1, str.length() - 1));        // strip quotes
 		} catch (StringIndexOutOfBoundsException e) {
@@ -68,13 +67,14 @@ public class Argument<P> {
 		try {
 			str = str.substring(1, str.length() - 1); // strip quotes
 			if (str.startsWith("#")) {
-				str = str.substring(1);
 				return Result.ok(Color.decode(str));
 			} else {
 				return COLORS.getOrDefault(str, Result.err(new ParsingError("unknown color", name, line)));
 			}
-		} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-			return Result.err(new ParsingError("invalid color format", name, line));
+		} catch (NumberFormatException e) {
+			return Result.err(new ParsingError("invalid color format (error parsing color string)", name, line));
+		} catch (StringIndexOutOfBoundsException e) {
+			return Result.err(new ParsingError("invalid color format (error parsing color hex)", name, line));
 		}
 	});
 
