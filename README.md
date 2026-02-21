@@ -64,6 +64,17 @@ Parameters:
 - `height`: `int`
 - `color`: `String` 
 
+### layer
+Creates a layer. Commands in higher layers will be drawn over lower layers.
+```js
+layer(1) {
+    //commands go here
+}
+```
+
+Parameters:
+- `layer number`: `int`
+
 ## Notes
 - A color can be written as a word or a hexcode, but words have a limited selection of colors (black, white, red, orange, yellow, green, blue, purple, pink)
 - Coordinates are in `[x:y]` format
