@@ -8,6 +8,7 @@ import org.lychee.zest.commands.EndLayerCommand;
 import org.lychee.zest.commands.EraseCommand;
 import org.lychee.zest.commands.FillCommand;
 import org.lychee.zest.commands.LineCommand;
+import org.lychee.zest.commands.TextCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +35,9 @@ public class ZestParser {
 					parseArguments(BeginLayerCommand.getArguments(), args), line
 			))
 			.put(EndLayerCommand.NAME, (_, _) -> Result.ok(new EndLayerCommand()))
+			.put(TextCommand.NAME, (args, line) -> TextCommand.build(
+					parseArguments(TextCommand.getArguments(), args), line
+			))
 			.build();
 
 	public static Result<Command, LineError> parseCommand(String line, int lineNumber) {

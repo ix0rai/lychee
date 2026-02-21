@@ -17,6 +17,8 @@ import java.io.InputStream;
 import static java.awt.RenderingHints.*;
 
 public class SwingHelper {
+	public static Font JBMONO;
+
 	public static void fixSwing() {
 		try {
 			// fix macos being busted
@@ -27,11 +29,11 @@ public class SwingHelper {
 
 		// todo duplicated in syntaxpain
 		try (InputStream is = SwingHelper.class.getResourceAsStream("/jbmono.ttf")) {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
+			JBMONO = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 
-			UIManager.put("Label.font", font);
-			UIManager.put("Button.font", font);
-			UIManager.put("EditorPane.font", font);
+			UIManager.put("Label.font", JBMONO);
+			UIManager.put("Button.font", JBMONO);
+			UIManager.put("EditorPane.font", JBMONO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
