@@ -51,9 +51,7 @@ public class CodePanel extends LycheePanel {
 		this.add(scrollPane);
 
 		try {
-			// todo replace with better intro
-			this.editor.setText(Files.readString(Path.of("testing.zst")));
-			//reloadCode();
+			this.editor.setText(Files.readString(Path.of("lychee_example.zst")));
 		} catch (Exception ignored) {
 
 		}
