@@ -64,6 +64,19 @@ Parameters:
 - `height`: `int`
 - `color`: `String` 
 
+### text
+Draws text from the starting coordinates, using the provided font size. Can be colored.
+```js
+text([0:0], 30, "hello", "white");
+text([0:0], 30, "hello", "#FFFFFF");
+```
+
+Parameters:
+- `start`: `Coordinate`
+- `fontSize`: `int`
+- `text`: `String`
+- `color`: `String`
+
 ### layer
 Creates a layer. Commands in higher layers will be drawn over lower layers.
 ```js
@@ -73,7 +86,7 @@ layer(1) {
 ```
 
 Parameters:
-- `layer number`: `int`
+- `layer`: `int`
 
 ## Notes
 - A color can be written as a word or a hexcode, but words have a limited selection of colors (black, white, red, orange, yellow, green, blue, purple, pink)
