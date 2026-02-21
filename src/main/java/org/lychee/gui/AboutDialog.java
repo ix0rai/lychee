@@ -55,6 +55,7 @@ public class AboutDialog {
 		pane.add(createLink("https://github.com/ix0rai/lychee", () -> openUrl("https://github.com/ix0rai/lychee")), cb.pos(0, 6));
 		pane.add(new Spacer(0, 10), cb.pos(0, 7));
 		pane.add(okButton, cb.pos(0, 8));
+		pane.add(new Spacer(0, 10), cb.pos(0, 9));
 
 		frame.pack();
 		frame.setResizable(false);
