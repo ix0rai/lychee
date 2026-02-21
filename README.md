@@ -65,19 +65,5 @@ parameters:
 - `color`: `String` 
 
 ## Notes
-- The default color is black. Using a command and specifying a color makes it the current color
 - A color can be written as a word or a hexcode, but words have a limited selection of colors (black, white, red, orange, yellow, green, blue, purple, pink)
 - Coordinates are in `[x:y]` format
-
-PLANS FOR TOMORROW:
-
-j
-- [ ] fix code panel resizing itself (adding scrolling)
-- [ ] implement error handling
-- [ ] implement layers
-
-t
-- [ ] make examples
-- [ ] write documentation
-- [ ] new logo (made using zest)
-- [ ] improve syntax highlighting
