@@ -2,6 +2,7 @@ package org.lychee.gui;
 
 import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.zest.ZestParser;
+import org.quiltmc.syntaxpain.LineNumbersRuler;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
@@ -30,6 +31,13 @@ public class CodePanel extends LycheePanel {
 		this.editor.setBackground(LycheeColors.DARK_RED);
 		this.editor.setCaretColor(LycheeColors.WHITE);
 		this.editor.setContentType("text/zest-sources");
+
+		final LineNumbersRuler ruler = LineNumbersRuler.install(new LineNumbersRuler(
+				this.editor, LycheeColors.WHITE, 0
+		));
+		ruler.setForeground(LycheeColors.RED);
+		ruler.setBackground(LycheeColors.DARK_RED);
+		ruler.setFont(this.editor.getFont());
 
 		editor.addKeyListener(new KeyAdapter() {
 			@Override
