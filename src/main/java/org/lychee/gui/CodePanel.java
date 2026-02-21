@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class CodePanel extends LycheePanel {
 	public static final int WIDTH = 400;
@@ -38,6 +40,12 @@ public class CodePanel extends LycheePanel {
 
 		this.add(scrollPane);
 
+		try {
+			// todo replace with better intro
+			this.editor.setText(Files.readString(Path.of("testing.zst")));
+		} catch (Exception ignored) {
+
+		}
 	}
 
 	public void reloadCode() {

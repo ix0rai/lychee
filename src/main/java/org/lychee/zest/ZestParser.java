@@ -36,9 +36,7 @@ public class ZestParser {
 		Map<String, Result<?, ParsingError>> results = new HashMap<>();
 		int i = 0;
 
-		System.out.println(lineNumber);
 		for (Pair<String, Argument<?>> argument : arguments) {
-			System.out.println(argument.a());
 			results.put(argument.a(), argument.b().parse(args[i].trim(), argument.a(), lineNumber));
 			i++;
 		}
@@ -59,10 +57,8 @@ public class ZestParser {
 
 			i++;
 		}
-		System.out.println(results);
-		scnr.close();
 
-		System.out.println(results);
+		scnr.close();
 		return results;
 	}
 
