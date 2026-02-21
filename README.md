@@ -60,3 +60,16 @@ parameters:
 
 returns:
 - `Shape`
+
+PLANS FOR TOMORROW:
+
+j
+- [ ] fix code panel resizing itself (adding scrolling)
+- [ ] implement error handling
+- [ ] implement layers
+
+t
+- [ ] make examples
+- [ ] write documentation
+- [ ] new logo (made using zest)
+- [ ] improve syntax highlighting
