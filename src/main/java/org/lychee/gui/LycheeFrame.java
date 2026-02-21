@@ -35,7 +35,7 @@ public class LycheeFrame extends JFrame {
 
 	public void init() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Lychee GUI");
+		this.setTitle("lychee");
 
 		Container contentPane = this.getContentPane();
 
