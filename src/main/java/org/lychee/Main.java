@@ -9,7 +9,5 @@ public class Main {
 		SwingHelper.fixSwing();
 		LycheeFrame frame = new LycheeFrame();
 		frame.init();
-		// todo remove
-		frame.updateCommands(ZestParser.parseFile("testing.zst"));
 	}
 }

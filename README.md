@@ -17,7 +17,6 @@ Lychee is useful for a few different applications:
 ### line
 Draws a straight line from the starting coordinates to the ending coordinates, using the provided width. Can be colored.
 ```js
-line([0, 0], [100, 100], 5);
 line([0, 0], [100, 100], 5), "white";
 line([0, 0], [100, 100], 5), "#FFFFFF";
 ```
@@ -26,7 +25,7 @@ parameters:
 - `start`: `Coordinate` 
 - `end`: `Coordinate`
 - `width`: `int`
-- `color`: `String` (optional)
+- `color`: `String`
 
 ### erase
 Erases a straight line from the starting coordinates to the ending coordinates, using the provided width. Cannot be colored.
@@ -40,9 +39,8 @@ parameters:
 - `width`: `int`
 
 ### fill
-Fills a rect with the current or chosen color from the starting coordinates, using the provided height and width.
+Fills a rect with the chosen color from the starting coordinates, using the provided height and width.
 ```js
-fill([0, 0], 50, 100);
 fill([0, 0], 50, 100, "white");
 fill([0, 0], 50, 100, "#FFFFFF");
 ```
@@ -51,12 +49,11 @@ parameters:
 - `start`: `Coordinate`
 - `width`: `int`
 - `height`: `int`
-- `color`: `String` (optional)
+- `color`: `String` 
 
 ### circle
 Draws a circle from the starting coordinates, using the provided height and width. Can be colored.
 ```js
-circle([0:0], 30, 30);
 circle([0:0], 30, 30, "white");
 circle([0:0], 30, 30, "#FFFFFF");
 ```
@@ -65,7 +62,7 @@ parameters:
 - `start`: `Coordinate`
 - `width`: `int`
 - `height`: `int`
-- `color`: `String` (optional)
+- `color`: `String` 
 
 ## Notes
 - The default color is black. Using a command and specifying a color makes it the current color
