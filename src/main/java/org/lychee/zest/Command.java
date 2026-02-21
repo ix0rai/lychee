@@ -7,8 +7,7 @@ public abstract class Command {
 
 	public Color changeColor(boolean hex, String color) {
 		if (hex) {
-			Color newColor = Color.decode(color);
-			return newColor;
+			return Color.decode(color);
 		} else {
 			return switch (color) {
 				case "black" -> Color.BLACK;
