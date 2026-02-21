@@ -21,7 +21,7 @@ line([0, 0], [100, 100], 5), "white";
 line([0, 0], [100, 100], 5), "#FFFFFF";
 ```
 
-parameters:
+Parameters:
 - `start`: `Coordinate` 
 - `end`: `Coordinate`
 - `width`: `int`
@@ -33,7 +33,7 @@ Erases a straight line from the starting coordinates to the ending coordinates, 
 erase([0, 0], [100, 100], 5);
 ```
 
-parameters:
+Parameters:
 - `start`: `Coordinate`
 - `end`: `Coordinate`
 - `width`: `int`
@@ -45,7 +45,7 @@ fill([0, 0], 50, 100, "white");
 fill([0, 0], 50, 100, "#FFFFFF");
 ```
 
-parameters:
+Parameters:
 - `start`: `Coordinate`
 - `width`: `int`
 - `height`: `int`
@@ -58,7 +58,7 @@ circle([0:0], 30, 30, "white");
 circle([0:0], 30, 30, "#FFFFFF");
 ```
 
-parameters:
+Parameters:
 - `start`: `Coordinate`
 - `width`: `int`
 - `height`: `int`
