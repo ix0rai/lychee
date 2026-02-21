@@ -1,6 +1,8 @@
-package org.lychee.zest;
+package org.lychee.zest.arguments;
 
 import com.google.common.collect.ImmutableMap;
+import org.lychee.zest.ParsingError;
+import org.lychee.zest.Result;
 
 import java.awt.Color;
 import java.util.Map;

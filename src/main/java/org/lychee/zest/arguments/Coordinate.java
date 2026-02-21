@@ -1,6 +1,4 @@
-package org.lychee.zest;
-
-import java.awt.event.MouseEvent;
+package org.lychee.zest.arguments;
 
 public class Coordinate {
 	private final int x;

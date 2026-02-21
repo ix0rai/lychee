@@ -1,4 +1,12 @@
-package org.lychee.zest;
+package org.lychee.zest.commands;
+
+import org.lychee.zest.arguments.Argument;
+import org.lychee.zest.Command;
+import org.lychee.zest.arguments.Coordinate;
+import org.lychee.zest.LineError;
+import org.lychee.zest.Pair;
+import org.lychee.zest.ParsingError;
+import org.lychee.zest.Result;
 
 import java.awt.*;
 import java.util.List;

@@ -1,6 +1,13 @@
 package org.lychee.zest;
 
 import com.google.common.collect.ImmutableMap;
+import org.lychee.zest.arguments.Argument;
+import org.lychee.zest.commands.BeginLayerCommand;
+import org.lychee.zest.commands.CircleCommand;
+import org.lychee.zest.commands.EndLayerCommand;
+import org.lychee.zest.commands.EraseCommand;
+import org.lychee.zest.commands.FillCommand;
+import org.lychee.zest.commands.LineCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,14 +30,29 @@ public class ZestParser {
 			.put(EraseCommand.NAME, (args, line) -> EraseCommand.build(
 					parseArguments(EraseCommand.getArguments(), args), line
 			))
+			.put(BeginLayerCommand.NAME, (args, line) -> BeginLayerCommand.build(
+					parseArguments(BeginLayerCommand.getArguments(), args), line
+			))
+			.put(EndLayerCommand.NAME, (_, _) -> Result.ok(new EndLayerCommand()))
 			.build();
 
 	public static Result<Command, LineError> parseCommand(String line, int lineNumber) {
+		lineNumber++;
+
 		try {
-			if (!line.endsWith(";")) {
+			line = line.trim();
+			boolean layerOpen = line.startsWith("layer");
+			boolean layerClose = line.startsWith("}");
+			boolean layer = layerOpen || layerClose;
+
+			if (!layer && !line.endsWith(";")) {
 				return Result.err(new LineError("line must end in a ;", lineNumber, null));
-			} else if (!line.contains("(") || !line.contains(")")) {
+			} else if (!layerClose && (!line.contains("(") || !line.contains(")"))) {
 				return Result.err(new LineError("command must have arguments enclosed by ()", lineNumber, null));
+			} else if (layerOpen && !line.endsWith("{")) {
+				return Result.err(new LineError("layer start must end with {", lineNumber, null));
+			} else if (layerClose && !line.equals("}")) {
+				return Result.err(new LineError("layer end must be a single }", lineNumber, null));
 			}
 
 			String commandName;
@@ -42,11 +64,18 @@ public class ZestParser {
 				arguments = splitByClose[0].trim();
 				String semicolon = splitByClose[1].trim();
 
-				if (!semicolon.equals(";")) {
+				if (!layer && !semicolon.equals(";")) {
 					return Result.err(new LineError("arguments must be immediately followed by a ;", lineNumber, null));
+				} else if (layer && !semicolon.equals("{")) {
+					return Result.err(new LineError("layer definition must be immediately followed by a {", lineNumber, null));
 				}
 			} catch (Exception e) {
-				return Result.err(new LineError("malformed line (string splitting error)", lineNumber, null));
+				if (!layerClose) {
+					return Result.err(new LineError("malformed line (string splitting error)", lineNumber, null));
+				} else {
+					arguments = "";
+					commandName = EndLayerCommand.NAME;
+				}
 			}
 
 			String[] args = arguments.split(",");
@@ -74,14 +103,14 @@ public class ZestParser {
 		return results;
 	}
 
-	public static ArrayList<Result<Command, LineError>> parseFromString(String code) {
+	public static Map<Integer, List<Result<Command, LineError>>> parseFromString(String code) {
 		ArrayList<Result<Command, LineError>> results = new ArrayList<>();
 
 		Scanner scnr = new Scanner(code);
 		int i = 0;
 		while (scnr.hasNextLine()) {
 			String line = scnr.nextLine();
-			if (!line.startsWith("//")) {
+			if (!line.startsWith("//") && !line.isBlank()) {
 				results.add(parseCommand(line, i));
 			}
 
@@ -89,7 +118,25 @@ public class ZestParser {
 		}
 
 		scnr.close();
-		return results;
+
+		Map<Integer, List<Result<Command, LineError>>> layeredResults = new HashMap<>();
+		int currentLayer = 0;
+		for (Result<Command, LineError> result : results) {
+			if (result.isOk()) {
+				Command command = result.unwrap();
+				if (command instanceof BeginLayerCommand beginLayerCommand) {
+					currentLayer = beginLayerCommand.getLayer();
+				} else if (command instanceof EndLayerCommand) {
+					currentLayer = 0;
+				} else {
+					layeredResults.computeIfAbsent(currentLayer, _ -> new ArrayList<>()).add(result);
+				}
+			} else {
+				layeredResults.computeIfAbsent(currentLayer, _ -> new ArrayList<>()).add(result);
+			}
+		}
+
+		return layeredResults;
 	}
 }
 

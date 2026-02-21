@@ -17,7 +17,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DrawingPanel extends LycheePanel {
 	public static final int WIDTH = 500;
@@ -44,12 +47,28 @@ public class DrawingPanel extends LycheePanel {
 		this.editorPane.setPreferredSize(new Dimension(CanvasPanel.WIDTH, CanvasPanel.HEIGHT));
 	}
 
-	public void setCommands(List<Result<Command, LineError>> commands) {
-		this.commands = commands.stream().filter(Result::isOk).map(Result::unwrap).toList();
-		this.errors = commands.stream().filter(Result::isErr).map(Result::unwrapErr).toList();
+	public void setCommands(Map<Integer, List<Result<Command, LineError>>> commands) {
+		this.errors = commands.values().stream().flatMap(Collection::stream).filter(Result::isErr).map(Result::unwrapErr).toList();
 
 		this.removeAll();
 		if (this.errors.isEmpty()) {
+			ArrayList<List<Result<Command, LineError>>> orderedCommands = new ArrayList<>();
+
+			int lowestLayer = Integer.MAX_VALUE;
+			int prevLowest = Integer.MIN_VALUE;
+			while (orderedCommands.size() != commands.size()) {
+				for (Map.Entry<Integer, List<Result<Command, LineError>>> entry : commands.entrySet()) {
+					if (entry.getKey() < lowestLayer && entry.getKey() > prevLowest) {
+						lowestLayer = entry.getKey();
+					}
+				}
+
+				orderedCommands.add(commands.get(lowestLayer));
+				prevLowest = lowestLayer;
+				lowestLayer = Integer.MAX_VALUE;
+			}
+
+			this.commands = orderedCommands.stream().flatMap(Collection::stream).map(Result::unwrap).toList();
 			this.add(canvas);
 		} else {
 			StringBuilder sb = new StringBuilder();

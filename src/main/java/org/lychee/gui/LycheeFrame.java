@@ -2,9 +2,6 @@ package org.lychee.gui;
 
 import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.gui.flex_grid.constraints.FlexGridConstraints;
-import org.lychee.zest.Command;
-import org.lychee.zest.LineError;
-import org.lychee.zest.Result;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -14,7 +11,6 @@ import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Image;
 import java.io.File;
-import java.util.List;
 
 public class LycheeFrame extends JFrame {
 	public static Image ICON_IMAGE;
@@ -64,14 +60,6 @@ public class LycheeFrame extends JFrame {
 
 	public void setCode(String code) {
 		this.codePanel.setCode(code);
-	}
-
-	public String getCode() {
-		return this.codePanel.getCode();
-	}
-
-	public void updateCommands(List<Result<Command, LineError>> commands) {
-		this.drawingPanel.setCommands(commands);
 	}
 
 	public Image render() {
