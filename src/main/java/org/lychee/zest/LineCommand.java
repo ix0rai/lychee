@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LineCommand extends Command {
-	private static final String NAME = "line";
+	public static final String NAME = "line";
 
 	private final Coordinate start;
 	private final Coordinate end;
@@ -35,8 +35,8 @@ public class LineCommand extends Command {
 		);
 	}
 
-	public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments) {
-    	return buildChecked(NAME, arguments, args -> new LineCommand(
+	public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments, int lineNumber) {
+    	return buildChecked(NAME, lineNumber, arguments, args -> new LineCommand(
 				(Coordinate) args.get("start").unwrap(),
 				(Coordinate) args.get("end").unwrap(),
 				(Integer) args.get("width").unwrap(),

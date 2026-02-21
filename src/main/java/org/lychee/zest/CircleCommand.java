@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CircleCommand extends Command {
-    private static final String NAME = "circle";
+    public static final String NAME = "circle";
 
     private final Coordinate start;
     private final int width;
@@ -28,8 +28,8 @@ public class CircleCommand extends Command {
         );
     }
 
-    public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments) {
-        return buildChecked(NAME, arguments, args -> new CircleCommand(
+    public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments, int line) {
+        return buildChecked(NAME, line, arguments, args -> new CircleCommand(
                 (Coordinate) args.get("start").unwrap(),
                 (Integer) args.get("width").unwrap(),
                 (Integer) args.get("height").unwrap(),
