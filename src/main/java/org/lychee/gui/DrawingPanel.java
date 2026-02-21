@@ -4,8 +4,11 @@ import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.zest.Command;
 
 import javax.swing.JPanel;
+import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +17,13 @@ public class DrawingPanel extends LycheePanel {
 	public static final int HEIGHT = 500;
 
 	private List<Command> commands = new ArrayList<>();
+	private final CanvasPanel canvas = new CanvasPanel();
 
 	public DrawingPanel() {
 		super(WIDTH, HEIGHT, WIDTH, HEIGHT, WIDTH, HEIGHT, false);
 		this.setBackground(LycheeColors.PINK);
 		this.setLayout(new FlexGridLayout());
-		this.add(new CanvasPanel());
+		this.add(canvas);
 	}
 
 	public void setCommands(List<Command> commands) {
@@ -44,5 +48,15 @@ public class DrawingPanel extends LycheePanel {
 				}
 			}
 		}
+
+		public Image render() {
+			BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+			this.printAll(image.getGraphics());
+			return image;
+		}
+	}
+
+	public Image render() {
+		return this.canvas.render();
 	}
 }

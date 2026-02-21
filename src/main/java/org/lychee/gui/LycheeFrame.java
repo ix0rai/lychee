@@ -7,6 +7,7 @@ import org.lychee.zest.Command;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Image;
@@ -29,8 +30,9 @@ public class LycheeFrame extends JFrame {
 	public static int HEIGHT = 600;
 	public static int WIDTH = 1000;
 
+	private final JEditorPane editorPane = new JEditorPane();
 	private final DrawingPanel drawingPanel = new DrawingPanel();
-	private final CodePanel codePanel = new CodePanel(drawingPanel);
+	private final CodePanel codePanel = new CodePanel(drawingPanel, editorPane);
 
 	public void init() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,8 +50,8 @@ public class LycheeFrame extends JFrame {
 
 		FlexGridConstraints.Absolute buttonPanelConstraints = FlexGridConstraints.createAbsolute().extent(1, 1);
 
-		this.add(new LeftButtonPanel(), buttonPanelConstraints.pos(0, 0));
-		this.add(new RightButtonPanel(), buttonPanelConstraints.pos(1, 9));
+		this.add(new LeftButtonPanel(this), buttonPanelConstraints.pos(0, 0));
+		this.add(new RightButtonPanel(this), buttonPanelConstraints.pos(1, 9));
 
 		contentPane.setBackground(LycheeColors.PINK);
 
@@ -57,7 +59,19 @@ public class LycheeFrame extends JFrame {
 		this.setIconImage(ICON_IMAGE);
 	}
 
+	public void setCode(String code) {
+		this.codePanel.setCode(code);
+	}
+
+	public String getCode() {
+		return this.codePanel.getCode();
+	}
+
 	public void updateCommands(List<Command> commands) {
 		this.drawingPanel.setCommands(commands);
+	}
+
+	public Image render() {
+		return this.drawingPanel.render();
 	}
 }

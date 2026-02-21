@@ -13,8 +13,8 @@ import java.awt.Image;
 import java.io.File;
 
 public class RightButtonPanel extends LycheeButtonPanel {
-	public RightButtonPanel() {
-		super(DrawingPanel.WIDTH);
+	public RightButtonPanel(LycheeFrame frame) {
+		super(DrawingPanel.WIDTH, frame);
 		this.setLayout(new BorderLayout());
 
 		JPanel leftButtons = new JPanel(new FlexGridLayout());
