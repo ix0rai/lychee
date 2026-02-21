@@ -30,6 +30,7 @@ public class RightButtonPanel extends LycheeButtonPanel {
 		JPanel rightButtons = new JPanel(new FlexGridLayout());
 		rightButtons.setOpaque(false);
 		rightButtons.add(new JLabel(LycheeFrame.ICON));
+		rightButtons.add(new Spacer(10, 0));
 		rightButtons.add(new LycheeButton("lychee."));
 		this.add(rightButtons, BorderLayout.EAST);
 	}
