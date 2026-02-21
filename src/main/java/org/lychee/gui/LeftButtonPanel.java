@@ -6,11 +6,9 @@ import org.lychee.gui.flex_grid.FlexGridLayout;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +40,7 @@ public class LeftButtonPanel extends LycheeButtonPanel {
 	}
 
 	private @NonNull JButton createExportButton(LycheeFrame frame) {
-		JButton exportImageButton = new JButton("export image");
+		JButton exportImageButton = new LycheeButton("export image");
 		exportImageButton.addActionListener(_ -> {
 			Image image = frame.render();
 			JFileChooser chooser = new JFileChooser();

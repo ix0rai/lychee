@@ -31,8 +31,9 @@ public class LycheeFrame extends JFrame {
 	public static int WIDTH = 1000;
 
 	private final JEditorPane editorPane = new JEditorPane();
-	private final DrawingPanel drawingPanel = new DrawingPanel();
+	private final DrawingPanel drawingPanel = new DrawingPanel(this);
 	private final CodePanel codePanel = new CodePanel(drawingPanel, editorPane);
+	private final RightButtonPanel rightButtonPanel = new  RightButtonPanel(this);
 
 	public void init() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +52,7 @@ public class LycheeFrame extends JFrame {
 		FlexGridConstraints.Absolute buttonPanelConstraints = FlexGridConstraints.createAbsolute().extent(1, 1);
 
 		this.add(new LeftButtonPanel(this), buttonPanelConstraints.pos(0, 0));
-		this.add(new RightButtonPanel(this), buttonPanelConstraints.pos(1, 9));
+		this.add(rightButtonPanel, buttonPanelConstraints.pos(1, 9));
 
 		contentPane.setBackground(LycheeColors.PINK);
 
@@ -73,5 +74,9 @@ public class LycheeFrame extends JFrame {
 
 	public Image render() {
 		return this.drawingPanel.render();
+	}
+
+	public void updateMouseProps(int x, int y, String hex) {
+		rightButtonPanel.setMouseProps(x, y, hex);
 	}
 }
