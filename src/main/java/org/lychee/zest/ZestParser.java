@@ -20,6 +20,9 @@ public class ZestParser {
 			.put(FillCommand.NAME, (args, line) -> FillCommand.build(
 					parseArguments(FillCommand.getArguments(), args), line
 			))
+			.put(EraseCommand.NAME, (args, line) -> EraseCommand.build(
+					parseArguments(EraseCommand.getArguments(), args), line
+			))
 			.build();
 
 	public static Result<Command, LineError> parseCommand(String line, int lineNumber) {
