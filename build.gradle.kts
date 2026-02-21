@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.lychee"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 application {
     mainClass = "org.lychee.Main"
