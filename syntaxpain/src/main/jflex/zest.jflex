@@ -95,115 +95,10 @@ SingleCharacter = [^\r\n\'\\]
 %%
 
 <YYINITIAL> {
-
-  /* keywords */
-  "abstract"                     |
-  "boolean"                      |
-  "break"                        |
-  "byte"                         |
-  "case"                         |
-  "catch"                        |
-  "char"                         |
-  "class"                        |
-  "const"                        |
-  "continue"                     |
-  "do"                           |
-  "double"                       |
-  "enum"                         |
-  "else"                         |
-  "extends"                      |
-  "final"                        |
-  "finally"                      |
-  "float"                        |
-  "for"                          |
-  "default"                      |
-  "implements"                   |
-  "import"                       |
-  "instanceof"                   |
-  "int"                          |
-  "interface"                    |
-  "long"                         |
-  "native"                       |
-  "new"                          |
-  "goto"                         |
-  "if"                           |
-  "public"                       |
-  "short"                        |
-  "super"                        |
-  "switch"                       |
-  "synchronized"                 |
-  "package"                      |
-  "private"                      |
-  "protected"                    |
-  "transient"                    |
-  "return"                       |
-  "record"                       |
-  "void"                         |
-  "static"                       |
-  "while"                        |
-  "this"                         |
-  "throw"                        |
-  "throws"                       |
-  "try"                          |
-  "volatile"                     |
-  "strictfp"                     |
-
-  "true"                         |
-  "false"                        |
-  "null"                         { return token(TokenType.KEYWORD); }
-
-  /* Java Built in types and wrappers */
-  "Boolean"                      |
-  "Byte"                         |
-  "Character"                    |
-  "Double"                       |
-  "Float"                        |
-  "Integer"                      |
-  "Object"                       |
-  "Short"                        |
-  "Void"                         |
-  "Class"                        |
-  "Number"                       |
-  "Package"                      |
-  "StringBuffer"                 |
-  "StringBuilder"                |
-  "CharSequence"                 |
-  "Thread"                       |
-  "String"                       { return token(TokenType.TYPE); }
-
-  /* Some Java standard Library Types */
-  "Throwable"                    |
-  "Cloneable"                    |
-  "Comparable"                   |
-  "Serializable"                 |
-  "Runnable"                     { return token(TokenType.TYPE); }
-
-  "WARNING"                      { return token(TokenType.WARNING); }
-  "ERROR"                        { return token(TokenType.ERROR); }
-
-  /* Frequently used Standard Exceptions */
-  "ArithmeticException"              |
-  "ArrayIndexOutOfBoundsException"   |
-  "ClassCastException"               |
-  "ClassNotFoundException"           |
-  "CloneNotSupportedException"       |
-  "Exception"                        |
-  "IllegalAccessException"           |
-  "IllegalArgumentException"         |
-  "IllegalStateException"            |
-  "IllegalThreadStateException"      |
-  "IndexOutOfBoundsException"        |
-  "InstantiationException"           |
-  "InterruptedException"             |
-  "NegativeArraySizeException"       |
-  "NoSuchFieldException"             |
-  "NoSuchMethodException"            |
-  "NullPointerException"             |
-  "NumberFormatException"            |
-  "RuntimeException"                 |
-  "SecurityException"                |
-  "StringIndexOutOfBoundsException"  |
-  "UnsupportedOperationException"    { return token(TokenType.TYPE2); }
+  /* zest commands */
+  "line"                         |
+  "fill"                         |
+  "circle"                       { return token(TokenType.TYPE); }
 
   /* operators */
 
@@ -214,56 +109,11 @@ SingleCharacter = [^\r\n\'\\]
   "["                            { return token(TokenType.OPERATOR,  BRACKET); }
   "]"                            { return token(TokenType.OPERATOR, -BRACKET); }
   ";"                            |
-  ","                            |
-  "."                            |
-  "="                            |
-  ">"                            |
-  "<"                            |
-  "!"                            |
-  "~"                            |
-  "?"                            |
-  ":"                            |
-  "=="                           |
-  "<="                           |
-  ">="                           |
-  "!="                           |
-  "&&"                           |
-  "||"                           |
-  "++"                           |
-  "--"                           |
-  "+"                            |
-  "-"                            |
-  "*"                            |
-  "/"                            |
-  "&"                            |
-  "|"                            |
-  "^"                            |
-  "%"                            |
-  "<<"                           |
-  ">>"                           |
-  ">>>"                          |
-  "+="                           |
-  "-="                           |
-  "*="                           |
-  "/="                           |
-  "&="                           |
-  "|="                           |
-  "^="                           |
-  "%="                           |
-  "<<="                          |
-  ">>="                          |
-  ">>>="                         { return token(TokenType.OPERATOR); }
+  ","                         { return token(TokenType.OPERATOR); }
 
   /* string literal */
   \"                             {
                                     yybegin(STRING);
-                                    tokenStart = (int) yychar;
-                                    tokenLength = 1;
-                                 }
-
-  /* character literal */
-  \'                             {
-                                    yybegin(CHARLITERAL);
                                     tokenStart = (int) yychar;
                                     tokenLength = 1;
                                  }
@@ -282,22 +132,6 @@ SingleCharacter = [^\r\n\'\\]
   {FloatLiteral}                 |
   {DoubleLiteral}                |
   {DoubleLiteral}[dD]            { return token(TokenType.NUMBER); }
-
-  // JavaDoc comments need a state so that we can highlight the @ controls
-  "/**"                          {
-                                    yybegin(JDOC);
-                                    tokenStart = (int) yychar;
-                                    tokenLength = 3;
-                                 }
-
-  /* comments */
-  {Comment}                      { return token(TokenType.COMMENT); }
-
-  /* whitespace */
-  {WhiteSpace}                   { }
-
-  /* identifiers */
-  {Identifier}                   { return token(TokenType.IDENTIFIER); }
 }
 
 
@@ -317,60 +151,6 @@ SingleCharacter = [^\r\n\'\\]
   \\.                            { tokenLength += 2; }
   {LineTerminator}               { yybegin(YYINITIAL);  }
 }
-
-<CHARLITERAL> {
-  \'                             {
-                                     yybegin(YYINITIAL);
-                                     // length also includes the trailing quote
-                                     return token(TokenType.STRING, tokenStart, tokenLength + 1);
-                                 }
-
-  {SingleCharacter}+             { tokenLength += yylength(); }
-
-  /* escape sequences */
-
-  \\.                            { tokenLength += 2; }
-  {LineTerminator}               { yybegin(YYINITIAL);  }
-}
-
-<JDOC> {
-  "*/"                           {
-                                     yybegin(YYINITIAL);
-                                     return token(TokenType.COMMENT, tokenStart, tokenLength + 2);
-                                 }
-
-  "@"                            {
-                                     yybegin(JDOC_TAG);
-                                     int start = tokenStart;
-                                     tokenStart = (int) yychar;
-                                     int len = tokenLength;
-                                     tokenLength = 1;
-                                     return token(TokenType.COMMENT, start, len);
-                                 }
-
-  .|[^]                           { tokenLength ++; }
-
-}
-
-<JDOC_TAG> {
-  ([:letter:])+ ":"?             { tokenLength += yylength(); }
-
-  "*/"                           {
-                                     yybegin(YYINITIAL);
-                                     return token(TokenType.COMMENT, tokenStart, tokenLength + 2);
-                                 }
-
-  .|[^]                           {
-                                     yybegin(JDOC);
-                                     // length also includes the trailing quote
-                                     int start = tokenStart;
-                                     tokenStart = (int) yychar;
-                                     int len = tokenLength;
-                                     tokenLength = 1;
-                                     return token(TokenType.COMMENT2, start, len);
-                                 }
-}
-
 
 /* error fallback */
 .|[^]                             {  }
