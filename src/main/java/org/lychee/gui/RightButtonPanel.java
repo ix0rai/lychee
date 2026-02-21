@@ -31,7 +31,9 @@ public class RightButtonPanel extends LycheeButtonPanel {
 		rightButtons.setOpaque(false);
 		rightButtons.add(new JLabel(LycheeFrame.ICON));
 		rightButtons.add(new Spacer(10, 0));
-		rightButtons.add(new LycheeButton("lychee."));
+		LycheeButton lycheeButton = new LycheeButton("lychee.");
+		lycheeButton.addActionListener(_ -> AboutDialog.show(frame));
+		rightButtons.add(lycheeButton);
 		this.add(rightButtons, BorderLayout.EAST);
 	}
 
