@@ -30,7 +30,7 @@ public class CodePanel extends LycheePanel {
 		editor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				panel.setCommands(ZestParser.parseFromString(editor.getText()));
+				//panel.setCommands(ZestParser.parseFromString(editor.getText()));
 			}
 		});
 
@@ -39,7 +39,7 @@ public class CodePanel extends LycheePanel {
 	}
 
 	public void reloadCode() {
-		drawingPanel.setCommands(ZestParser.parseFromString(editor.getText()));
+		//drawingPanel.setCommands(ZestParser.parseFromString(editor.getText()));
 	}
 
 	public void setCode(String code) {

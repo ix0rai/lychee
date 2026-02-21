@@ -2,124 +2,71 @@ package org.lychee.zest;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ZestParser {
-	// take in file, convert to array list of commands
-	private ArrayList<Command> commands;
-
-	public ZestParser() {
-		commands = new ArrayList<>();
-	}
-
-	public static Command parseCommand(String line) {
+	public static Result<Command, LineError> parseCommand(String line, int lineNumber) {
 		String[] newLine = line.trim().split("\\(");
 		String commandName = newLine[0];
 		// todo make this better -- the substring removes the );
 		String parameters = newLine[1].substring(0, newLine[1].length() - 2);
+		String[] args = parameters.split(",");
 
-		Command command = null;
+		return switch (commandName) {
+			case "line" -> {
+				Map<String, Result<?, ParsingError>> arguments = parseArguments(LineCommand.getArguments(), args, lineNumber);
+				yield LineCommand.build(arguments);
+			}
+			default -> Result.err(new LineError("command not found", new ParsingError("could not parse", lineNumber)));
+		};
+	}
 
-		switch (commandName) {
-			case "line":
-				String[] args = parameters.split(",");
-				Coordinate lineStart = (Coordinate) parseArgument(args[0]);
-				Coordinate lineEnd = (Coordinate) parseArgument(args[1]);
-				int lineWidth = (int) parseArgument(args[2]);
-				if (args.length == 4) {
-					String color = (String) parseArgument(args[3]);
-					command = new LineCommand(lineStart, lineEnd, lineWidth, color);
-				} else {
-					command = new LineCommand(lineStart, lineEnd, lineWidth);
-				}
-				break;
-			case "erase":
-				String[] eraseArgs = parameters.split(",");
-				Coordinate eraseStart = (Coordinate) parseArgument(eraseArgs[0]);
-				Coordinate eraseEnd = (Coordinate) parseArgument(eraseArgs[1]);
-				int eraseWidth = (int) parseArgument(eraseArgs[2]);
+	private static Map<String, Result<?, ParsingError>> parseArguments(Map<String, Argument<?>> arguments, String[] args, int lineNumber) {
+		Map<String, Result<?, ParsingError>> results = new HashMap<>();
+		int i = 0;
 
-				command = new EraseCommand(eraseStart, eraseEnd, eraseWidth);
-				break;
-			case "fill":
-				String[] fillArgs = parameters.split(",");
-				Coordinate fillStart = (Coordinate) parseArgument(fillArgs[0]);
-				int fillWidth = (int) parseArgument(fillArgs[1]);
-				int fillHeight = (int) parseArgument(fillArgs[2]);
-				if (fillArgs.length == 4) {
-					String color = (String) parseArgument(fillArgs[3]);
-					command = new FillCommand(fillStart, fillWidth, fillHeight, color);
-				} else {
-					command = new FillCommand(fillStart, fillWidth, fillHeight);
-				}
-				break;
-			case "circle":
-				String[] circleArgs = parameters.split(",");
-				Coordinate circleStart = (Coordinate) parseArgument(circleArgs[0]);
-				int circleWidth = (int) parseArgument(circleArgs[1]);
-				int circleHeight = (int) parseArgument(circleArgs[2]);
-				if (circleArgs.length == 4) {
-					String color = (String) parseArgument(circleArgs[3]);
-					command = new CircleCommand(circleStart, circleWidth, circleHeight, color);
-				} else {
-					command = new CircleCommand(circleStart, circleWidth, circleHeight);
-				}
-				break;
-			default:
-				System.out.println("Something went wrong!");
-				break;
+		for (Map.Entry<String, Argument<?>> argument : arguments.entrySet()) {
+			results.put(argument.getKey(), argument.getValue().parse(args[i], lineNumber));
+			i++;
 		}
-		return command;
+
+		return results;
 	}
 
-	public static Object parseArgument(String arg) {
-		arg = arg.trim();
-		if (arg.startsWith("[") && arg.endsWith("]")) {
-			return Coordinate.parse(arg);
-		} else if (arg.startsWith("\"") && arg.endsWith("\"")) {
-			return parseString(arg);
-		} else {
-			// assume int
-			return Integer.parseInt(arg);
-		}
-	}
-
-	public static String parseString(String arg) {
-		return arg.substring(1, arg.length() - 1);
-	}
-
-	public static ArrayList<Command> parseFromString(String code) {
-		ArrayList<Command> commands = new ArrayList<>();
+	public static ArrayList<Result<Command, LineError>> parseFromString(String code) {
+		ArrayList<Result<Command, LineError>> results = new ArrayList<>();
 
 		Scanner scnr = new Scanner(code);
+		int i = 0;
 		while (scnr.hasNextLine()) {
 			String line = scnr.nextLine();
 			if (line.endsWith(";")) {
-				commands.add(parseCommand(line));
-				System.out.println("Added!");
+				results.add(parseCommand(line, i));
 			}
+
+			i++;
 		}
-		System.out.println(commands);
+		System.out.println(results);
 		scnr.close();
-		return commands;
+
+		System.out.println(results);
+		return results;
 	}
 
-	public ArrayList<Command> parseFile(String filename) {
+	public static ArrayList<Result<Command, LineError>> parseFile(String filename) {
+		ArrayList<Result<Command, LineError>> results;
+
 		try {
-			Scanner scnr = new Scanner(new FileReader(filename));
-			while (scnr.hasNextLine()) {
-				String line = scnr.nextLine();
-				if (line.endsWith(";")) {
-					commands.add(parseCommand(line));
-					System.out.println("Added!");
-				}
-			}
-			System.out.println(commands);
-			scnr.close();
-		} catch(IOException io) {
-			System.out.println("Something went wrong!");
+			results = parseFromString(Files.readString(Path.of(filename)));
+		} catch (IOException io) {
+			throw new RuntimeException(io);
 		}
-		return commands;
+
+		return results;
 	}
 }

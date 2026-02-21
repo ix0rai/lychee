@@ -1,26 +1,37 @@
 package org.lychee.zest;
 
+import org.jspecify.annotations.Nullable;
+
 import java.awt.*;
+import java.util.Map;
+import java.util.function.Function;
 
 public abstract class Command {
-	abstract public Shape execute(Graphics2D graphics);
+	private final String name;
 
-	public Color changeColor(boolean hex, String color) {
-		if (hex) {
-			return Color.decode(color);
+	protected Command(String name) {
+		this.name = name;
+	}
+
+	abstract public void execute(Graphics2D graphics);
+
+	public static @Nullable LineError checkArguments(String name, Map<String, Result<?, ParsingError>> arguments) {
+		for (Result<?, ParsingError> result : arguments.values()) {
+			if (result.isErr()) {
+				return new LineError(name, result.unwrapErr());
+			}
+		}
+
+		return null;
+	}
+
+	public static Result<Command, LineError> buildChecked(String name, Map<String, Result<?, ParsingError>> arguments, Function<Map<String, Result<?, ParsingError>>, Command> builder) {
+		var err = Command.checkArguments("line", arguments);
+
+		if (err != null) {
+			return Result.err(err);
 		} else {
-			return switch (color) {
-				case "black" -> Color.BLACK;
-				case "white" -> Color.WHITE;
-				case "red" -> Color.RED;
-				case "orange" -> Color.ORANGE;
-				case "yellow" -> Color.YELLOW;
-				case "green" -> Color.GREEN;
-				case "blue" -> Color.BLUE;
-				case "purple" -> Color.MAGENTA;
-				case "pink" -> Color.PINK;
-				default -> Color.BLACK;
-			};
+			return Result.ok(builder.apply(arguments));
 		}
 	}
 }
