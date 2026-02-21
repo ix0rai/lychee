@@ -16,8 +16,8 @@ Lychee is useful for a few different applications:
 ### line
 Draws a straight line from the starting coordinates to the ending coordinates, using the provided width. Can be colored.
 ```js
-line([0:0], [100:100], 5), "white");
-line([0:0], [100:100], 5), "#FFFFFF");
+line([0:0], [100:100], 5, "red");
+line([0:0], [100:100], 5, "#bf3344");
 ```
 
 Parameters:
@@ -40,8 +40,8 @@ Parameters:
 ### fill
 Fills a rect with the chosen color from the starting coordinates, using the provided height and width.
 ```js
-fill([0:0], 50, 100, "white");
-fill([0:0], 50, 100, "#FFFFFF");
+fill([0:0], 50, 100, "red");
+fill([0:0], 50, 100, "#bf3344");
 ```
 
 Parameters:
@@ -53,8 +53,8 @@ Parameters:
 ### circle
 Draws a circle from the starting coordinates, using the provided height and width. Can be colored.
 ```js
-circle([0:0], 30, 30, "white");
-circle([0:0], 30, 30, "#FFFFFF");
+circle([0:0], 30, 30, "red");
+circle([0:0], 30, 30, "#bf3344");
 ```
 
 Parameters:
@@ -66,8 +66,8 @@ Parameters:
 ### text
 Draws text from the starting coordinates, using the provided font size. Can be colored.
 ```js
-text([0:0], 30, "hello", "white");
-text([0:0], 30, "hello", "#FFFFFF");
+text([50:50], 30, "hello", "red");
+text([50:50], 30, "hello", "#bf3344");
 ```
 
 Parameters:
