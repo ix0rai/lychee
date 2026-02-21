@@ -8,8 +8,6 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

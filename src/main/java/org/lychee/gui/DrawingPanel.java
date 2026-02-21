@@ -7,6 +7,7 @@ import org.lychee.zest.LineError;
 import org.lychee.zest.Result;
 
 import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,6 +28,7 @@ public class DrawingPanel extends LycheePanel {
 	private List<LineError> errors = new ArrayList<>();
 
 	private final JEditorPane editorPane = new JEditorPane();
+	private final JScrollPane scrollPane = new JScrollPane(editorPane);
 	private final CanvasPanel canvas = new CanvasPanel();
 
 	public DrawingPanel(LycheeFrame frame) {
@@ -55,7 +57,7 @@ public class DrawingPanel extends LycheePanel {
 				sb.append(error.toString()).append("\n");
 			}
 			this.editorPane.setText(sb.toString());
-			this.add(editorPane);
+			this.add(scrollPane);
 		}
 
 		this.revalidate();
