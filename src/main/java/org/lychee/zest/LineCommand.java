@@ -1,19 +1,18 @@
 package org.lychee.zest;
 
-import com.google.common.collect.ImmutableSortedMap;
-
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
 public class LineCommand extends Command {
+	private static final String NAME = "line";
+
 	private final Coordinate start;
 	private final Coordinate end;
 	private final int width;
 	private final Color color;
 
 	public LineCommand(Coordinate start, Coordinate end, int width, Color color) {
-		super("line");
 		this.start = start;
 		this.end = end;
 		this.width = width;
@@ -37,7 +36,7 @@ public class LineCommand extends Command {
 	}
 
 	public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments) {
-    	return buildChecked("line", arguments, args -> new LineCommand(
+    	return buildChecked(NAME, arguments, args -> new LineCommand(
 				(Coordinate) args.get("start").unwrap(),
 				(Coordinate) args.get("end").unwrap(),
 				(Integer) args.get("width").unwrap(),

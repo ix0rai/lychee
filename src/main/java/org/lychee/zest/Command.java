@@ -7,12 +7,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public abstract class Command {
-	private final String name;
-
-	protected Command(String name) {
-		this.name = name;
-	}
-
 	abstract public void execute(Graphics2D graphics);
 
 	public static @Nullable LineError checkArguments(String name, Map<String, Result<?, ParsingError>> arguments) {
@@ -26,7 +20,7 @@ public abstract class Command {
 	}
 
 	public static Result<Command, LineError> buildChecked(String name, Map<String, Result<?, ParsingError>> arguments, Function<Map<String, Result<?, ParsingError>>, Command> builder) {
-		var err = Command.checkArguments("line", arguments);
+		var err = Command.checkArguments(name, arguments);
 
 		if (err != null) {
 			return Result.err(err);

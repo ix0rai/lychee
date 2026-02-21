@@ -64,6 +64,10 @@ public class Argument<P> {
 
 	public static final Argument<Color> COLOR = new Argument<>("color", (str, name, line) -> {
 		// "blue", "#FFFFFF", "#000000"
+		if (!str.startsWith("\"") || !str.endsWith("\"")) {
+			return Result.err(new ParsingError("color must be surrounded by double quotes", name, line));
+		}
+
 		try {
 			str = str.substring(1, str.length() - 1); // strip quotes
 			if (str.startsWith("#")) {

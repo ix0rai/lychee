@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 public class FillCommand extends Command {
+	private static final String NAME = "fill";
+
 	private final Coordinate start;
 	private final int width;
 	private final int height;
 	private final Color color;
 
 	public FillCommand(Coordinate start, int width, int height, Color color) {
-		super("fill");
 		this.start = start;
 		this.width = width;
 		this.height = height;
@@ -28,7 +29,7 @@ public class FillCommand extends Command {
 	}
 
 	public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments) {
-		return buildChecked("line", arguments, args -> new FillCommand(
+		return buildChecked(NAME, arguments, args -> new FillCommand(
 				(Coordinate) args.get("start").unwrap(),
 				(Integer) args.get("width").unwrap(),
 				(Integer) args.get("height").unwrap(),
