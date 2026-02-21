@@ -28,7 +28,7 @@ public class FillCommand extends Command {
 	}
 
 	public static Result<Command, LineError> build(Map<String, Result<?, ParsingError>> arguments) {
-		return buildChecked("line", arguments, args -> new CircleCommand(
+		return buildChecked("line", arguments, args -> new FillCommand(
 				(Coordinate) args.get("start").unwrap(),
 				(Integer) args.get("width").unwrap(),
 				(Integer) args.get("height").unwrap(),
@@ -40,7 +40,7 @@ public class FillCommand extends Command {
 	public void execute(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.setStroke(new BasicStroke(5));
-		graphics.fillRect(start.getX(), start.getY(), width, height);
+		graphics.fillRoundRect(start.getX(), start.getY(), width, height, 1, 1);
 	}
 
 	public String toString() {
