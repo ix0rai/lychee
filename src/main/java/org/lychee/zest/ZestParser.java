@@ -19,10 +19,30 @@ public class ZestParser {
 			String parameters = newLine[1].substring(0, newLine[1].length() - 2);
 			String[] args = parameters.split(",");
 
-			return switch (commandName) {
-				case "line" -> {
-					Map<String, Result<?, ParsingError>> arguments = parseArguments(LineCommand.getArguments(), args, lineNumber);
-					yield LineCommand.build(arguments);
+				command = new EraseCommand(eraseStart, eraseEnd, eraseWidth);
+				break;
+			case "fill":
+				String[] fillArgs = parameters.split(",");
+				Coordinate fillStart = (Coordinate) parseArgument(fillArgs[0]);
+				int fillWidth = (int) parseArgument(fillArgs[1]);
+				int fillHeight = (int) parseArgument(fillArgs[2]);
+				if (fillArgs.length == 4) {
+					String color = (String) parseArgument(fillArgs[3]);
+					command = new FillCommand(fillStart, fillWidth, fillHeight, color);
+				} else {
+					command = new FillCommand(fillStart, fillWidth, fillHeight);
+				}
+				break;
+			case "circle":
+				String[] circleArgs = parameters.split(",");
+				Coordinate circleStart = (Coordinate) parseArgument(circleArgs[0]);
+				int circleWidth = (int) parseArgument(circleArgs[1]);
+				int circleHeight = (int) parseArgument(circleArgs[2]);
+				if (circleArgs.length == 4) {
+					String color = (String) parseArgument(circleArgs[3]);
+					command = new CircleCommand(circleStart, circleWidth, circleHeight, color);
+				} else {
+					command = new CircleCommand(circleStart, circleWidth, circleHeight);
 				}
 				default ->
 						Result.err(new LineError("command not found", new ParsingError("could not parse", null, lineNumber)));
