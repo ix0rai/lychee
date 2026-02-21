@@ -1,1 +1,7 @@
-circle([220:220], 30, 60, "#e2cdc8");
+//example of a drawing of a lychee
+circle([300:220], 30, 10, "#3ca01f");
+circle([220:220], 60, 60, "#e2cdc8");
+circle([235:245], 55, 40, "#df374d");
+circle([220:260], 50, 30, "#df374d");
+circle([245:267], 30, 30, "#df374d");
+circle([220:220], 50, 50, "#e2cdc8");
