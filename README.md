@@ -1,32 +1,35 @@
-## what is lychee?
-Lychee is a paint app designed to use code instead of brush.
-Lychee uses Zest, our custom language, to design images in code. This has many advantages:
-- smaller image files
-- more shareability
-- more friendship
-- more zestiness
-  You may be asking: why not just use SVG? Our answer: embrace the zest. Live the wild life. Live the lychee life.
-## why is lychee?
+## What is Lychee?
+Lychee is a paint app designed to use code to draw images instead of brushstrokes.
+Lychee uses Zest, our custom programming language, to draw images. This has many advantages:
+- Smaller image files
+- More shareability
+- More friendship
+- More zestiness
+
+
+  You may be asking: why not just use SVG? Our answer: embrace the zest. Live the wild life. Live the Lychee life.
+## Why is Lychee?
 Lychee is useful for a few different applications:
-- simple graphic design work
-- learning to code
-- providing a more intuitive alternative to svg
-## commands
+- Simple graphic design work
+- Learning to code
+- Providing a more intuitive alternative to SVG
+## Commands
 ### line
-Draws a straight line from the start to the end, using the provided width.
+Draws a straight line from the starting coordinates to the ending coordinates, using the provided width. Can be colored.
 ```js
 line([0, 0], [100, 100], 5);
+line([0, 0], [100, 100], 5), "white";
+line([0, 0], [100, 100], 5), "#FFFFFF";
 ```
 
 parameters:
-- `start`: `Coordinate`
+- `start`: `Coordinate` 
 - `end`: `Coordinate`
 - `width`: `int`
+- `color`: `String` (optional)
 
-returns:
-- `Shape`
 ### erase
-Erases in a straight line from start to end, using the provided width.
+Erases a straight line from the starting coordinates to the ending coordinates, using the provided width. Cannot be colored.
 ```js
 erase([0, 0], [100, 100], 5);
 ```
@@ -36,30 +39,38 @@ parameters:
 - `end`: `Coordinate`
 - `width`: `int`
 
-returns:
-- `Shape`
 ### fill
-Fills a shape with the currently set colour.
+Fills a rect with the current or chosen color from the starting coordinates, using the provided height and width.
 ```js
-var shape1 = line([0, 0], [100, 100], 5);
-fill(shape1);
-```
-
-parameters:
-- `shape`: `Shape`
-
-### circle
-```js
-line([0, 0], [100, 100], 5);
+fill([0, 0], 50, 100);
+fill([0, 0], 50, 100, "white");
+fill([0, 0], 50, 100, "#FFFFFF");
 ```
 
 parameters:
 - `start`: `Coordinate`
-- `end`: `Coordinate`
 - `width`: `int`
+- `height`: `int`
+- `color`: `String` (optional)
 
-returns:
-- `Shape`
+### circle
+Draws a circle from the starting coordinates, using the provided height and width. Can be colored.
+```js
+circle([0:0], 30, 30);
+circle([0:0], 30, 30, "white");
+circle([0:0], 30, 30, "#FFFFFF");
+```
+
+parameters:
+- `start`: `Coordinate`
+- `width`: `int`
+- `height`: `int`
+- `color`: `String` (optional)
+
+## Notes
+- The default color is black. Using a command and specifying a color makes it the current color
+- A color can be written as a word or a hexcode, but words have a limited selection of colors (black, white, red, orange, yellow, green, blue, purple, pink)
+- Coordinates are in `[x:y]` format
 
 PLANS FOR TOMORROW:
 

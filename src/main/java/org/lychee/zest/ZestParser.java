@@ -28,7 +28,7 @@ public class ZestParser {
 				Coordinate lineEnd = (Coordinate) parseArgument(args[1]);
 				int lineWidth = (int) parseArgument(args[2]);
 				if (args.length == 4) {
-					String color = (String) parseArgument(args[3]);
+					String color = ((String) parseArgument(args[3])).toLowerCase();
 					command = new LineCommand(lineStart, lineEnd, lineWidth, color);
 				} else {
 					command = new LineCommand(lineStart, lineEnd, lineWidth);
@@ -48,7 +48,7 @@ public class ZestParser {
 				int fillWidth = (int) parseArgument(fillArgs[1]);
 				int fillHeight = (int) parseArgument(fillArgs[2]);
 				if (fillArgs.length == 4) {
-					String color = (String) parseArgument(fillArgs[3]);
+					String color = ((String) parseArgument(fillArgs[3])).toLowerCase();
 					command = new FillCommand(fillStart, fillWidth, fillHeight, color);
 				} else {
 					command = new FillCommand(fillStart, fillWidth, fillHeight);
@@ -60,7 +60,7 @@ public class ZestParser {
 				int circleWidth = (int) parseArgument(circleArgs[1]);
 				int circleHeight = (int) parseArgument(circleArgs[2]);
 				if (circleArgs.length == 4) {
-					String color = (String) parseArgument(circleArgs[3]);
+					String color = ((String) parseArgument(circleArgs[3])).toLowerCase();
 					command = new CircleCommand(circleStart, circleWidth, circleHeight, color);
 				} else {
 					command = new CircleCommand(circleStart, circleWidth, circleHeight);
