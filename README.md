@@ -12,6 +12,13 @@ Lychee is useful for a few different applications:
 - Simple graphic design work
 - Learning to code
 - Providing a more intuitive alternative to SVG
+
+## Usage
+Run using Gradle:
+```bash
+./gradlew run
+```
+
 ## Commands
 ### line
 Draws a straight line from the starting coordinates to the ending coordinates, using the provided width. Can be colored.
