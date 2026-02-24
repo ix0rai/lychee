@@ -49,10 +49,6 @@ public class CircleCommand extends Command {
     public void execute(Graphics2D graphics) {
         graphics.setColor(this.color);
         graphics.setStroke(new BasicStroke(width));
-        graphics.drawOval(start.getX(), start.getY(), width, height);
-    }
-
-    public String toString() {
-        return "circle: " + start + " | " + width + " | " + height + " | " + color;
+        graphics.drawOval(start.x(), start.y(), width, height);
     }
 }

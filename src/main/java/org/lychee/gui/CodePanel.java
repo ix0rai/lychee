@@ -6,6 +6,7 @@ import org.quiltmc.syntaxpain.LineNumbersRuler;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -42,11 +43,9 @@ public class CodePanel extends LycheePanel {
 		editor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				reloadCode();
+				SwingUtilities.invokeLater(CodePanel.this::reloadCode);
 			}
 		});
-
-		editor.addPropertyChangeListener(_ -> reloadCode());
 
 		this.add(scrollPane);
 
@@ -55,6 +54,8 @@ public class CodePanel extends LycheePanel {
 		} catch (Exception ignored) {
 
 		}
+
+		reloadCode();
 	}
 
 	public void reloadCode() {
@@ -64,9 +65,5 @@ public class CodePanel extends LycheePanel {
 	public void setCode(String code) {
 		this.editor.setText(code);
 		this.reloadCode();
-	}
-
-	public String getCode() {
-		return this.editor.getText();
 	}
 }

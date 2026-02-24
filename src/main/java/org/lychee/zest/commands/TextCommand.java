@@ -9,7 +9,6 @@ import org.lychee.zest.Result;
 import org.lychee.zest.arguments.Argument;
 import org.lychee.zest.arguments.Coordinate;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -54,6 +53,6 @@ public class TextCommand extends Command {
 		graphics.setColor(this.color);
 		graphics.setFont(SwingHelper.JBMONO.deriveFont(Font.ITALIC, this.fontSize));
 		SwingHelper.fix(graphics);
-		graphics.drawString(this.text, start.getX(), start.getY());
+		graphics.drawString(this.text, start.x(), start.y());
 	}
 }

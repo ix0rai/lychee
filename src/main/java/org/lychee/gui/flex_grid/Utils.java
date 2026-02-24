@@ -172,7 +172,7 @@ public class Utils {
 	}
 
 	public static int clamp(long value, int min, int max) {
-		return (int) clamp(value, (long) min, (long) max);
+		return (int) clamp(value, min, (long) max);
 	}
 
 	public static long clamp(long value, long min, long max) {
@@ -180,7 +180,7 @@ public class Utils {
 	}
 
 	public static float clamp(double value, float min, float max) {
-		return (float) clamp(value, (double) min, (double) max);
+		return (float) clamp(value, min, (double) max);
 	}
 
 	public static double clamp(double value, double min, double max) {

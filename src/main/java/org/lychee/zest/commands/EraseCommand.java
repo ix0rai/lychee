@@ -28,7 +28,7 @@ public class EraseCommand extends Command {
 	public void execute(Graphics2D graphics) {
 		graphics.setColor(graphics.getBackground());
 		graphics.setStroke(new BasicStroke(width));
-		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+		graphics.drawLine(start.x(), start.y(), end.x(), end.y());
 	}
 
 	public static java.util.List<Pair<String, Argument<?>>> getArguments() {
@@ -45,10 +45,5 @@ public class EraseCommand extends Command {
 				(Coordinate) args.get("end").unwrap(),
 				(Integer) args.get("width").unwrap()
 		));
-	}
-
-
-	public String toString() {
-		return start + " | " + end + " | " + width;
 	}
 }

@@ -1,6 +1,5 @@
 package org.lychee.gui;
 
-import com.google.common.graph.Graph;
 import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.zest.Command;
 import org.lychee.zest.LineError;
@@ -18,7 +17,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

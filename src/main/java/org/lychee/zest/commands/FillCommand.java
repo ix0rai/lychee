@@ -49,10 +49,6 @@ public class FillCommand extends Command {
 	public void execute(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.setStroke(new BasicStroke(5));
-		graphics.fillRoundRect(start.getX(), start.getY(), width, height, 1, 1);
-	}
-
-	public String toString() {
-		return "fill: " + start + " | " + width + " | " + height + " | " + color;
+		graphics.fillRoundRect(start.x(), start.y(), width, height, 1, 1);
 	}
 }

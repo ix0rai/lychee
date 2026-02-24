@@ -31,7 +31,7 @@ public class LineCommand extends Command {
 	public void execute(Graphics2D graphics) {
 		graphics.setColor(color);
 		graphics.setStroke(new BasicStroke(width));
-		graphics.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+		graphics.drawLine(start.x(), start.y(), end.x(), end.y());
 	}
 
 	public static List<Pair<String, Argument<?>>> getArguments() {
@@ -50,9 +50,5 @@ public class LineCommand extends Command {
 				(Integer) args.get("width").unwrap(),
 				(Color) args.get("color").unwrap()
 		));
-	}
-
-	public String toString() {
-		return "line: " + start + " | " + end + " | " + width + " | " + color;
 	}
 }
