@@ -3,16 +3,9 @@ package org.lychee.gui;
 import org.lychee.gui.flex_grid.FlexGridLayout;
 import org.lychee.gui.flex_grid.constraints.FlexGridConstraints;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
 
 public class RightButtonPanel extends LycheeButtonPanel {
 	private final JPanel leftButtons = new JPanel(new FlexGridLayout());

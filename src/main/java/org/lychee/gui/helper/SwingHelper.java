@@ -8,9 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.InputStream;
 
@@ -68,10 +66,6 @@ public class SwingHelper {
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		// no ImageIO, I don't want you to write tons of tiny files to the disk, to be quite honest
 		ImageIO.setUseCache(false);
-	}
-
-	public static void fix(Graphics g) {
-		if (g instanceof Graphics2D g2d) fix(g2d);
 	}
 
 	public static void fix(Graphics2D g2d) {

@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Dimension;
 
 public abstract class LycheePanel extends JPanel {
-	public static int BORDER_WEIGHT = 10;
+	public static final int BORDER_WEIGHT = 10;
 
 	private final int minWidth;
 	private final int minHeight;

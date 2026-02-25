@@ -6,9 +6,7 @@ import org.lychee.zest.Pair;
 import org.lychee.zest.ParsingError;
 import org.lychee.zest.Result;
 import org.lychee.zest.arguments.Argument;
-import org.lychee.zest.arguments.Coordinate;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.List;
 import java.util.Map;

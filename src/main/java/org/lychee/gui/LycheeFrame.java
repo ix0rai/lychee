@@ -13,8 +13,8 @@ import java.awt.Image;
 import java.io.File;
 
 public class LycheeFrame extends JFrame {
-	public static Image ICON_IMAGE;
-	public static Icon ICON;
+	public static final Image ICON_IMAGE;
+	public static final Icon ICON;
 
 	static {
 		try {
@@ -25,8 +25,8 @@ public class LycheeFrame extends JFrame {
 		}
 	}
 
-	public static int HEIGHT = 600;
-	public static int WIDTH = 1000;
+	public static final int HEIGHT = 600;
+	public static final int WIDTH = 1000;
 
 	private final JEditorPane editorPane = new JEditorPane();
 	private final DrawingPanel drawingPanel = new DrawingPanel(this);
