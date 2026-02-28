@@ -117,6 +117,7 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 	protected final JEditorPane editor;
 	protected final Color currentLineColor;
 	protected final int lineOffset;
+	protected final Font font;
 
 	//  Keep history information to reduce the number of times the component
 	//  needs to be repainted
@@ -126,14 +127,11 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 	// The formatting to use for displaying numbers.  Use in String.format(numbersFormat, line)
 	private String numbersFormat = "%3d";
 
-	public LineNumbersRuler(JEditorPane editor, Color currentLineColor) {
-		this(editor, currentLineColor, 0);
-	}
-
-	public LineNumbersRuler(JEditorPane editor, Color currentLineColor, int lineOffset) {
+	public LineNumbersRuler(JEditorPane editor, Color currentLineColor, int lineOffset, Font font) {
 		this.editor = editor;
 		this.currentLineColor = currentLineColor;
 		this.lineOffset = lineOffset;
+		this.font = font;
 
 		final Insets editorInsets = this.editor.getInsets();
 		this.setBorder(createEmptyBorder(editorInsets.top, 5, editorInsets.bottom, 5));
@@ -154,7 +152,7 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 		if (force || this.lastDigits != digits) {
 			this.lastDigits = digits;
 			this.numbersFormat = "%" + digits + "d";
-			FontMetrics fontMetrics = this.getFontMetrics(SyntaxStyle.FONT);
+			FontMetrics fontMetrics = this.getFontMetrics(font);
 			int width = fontMetrics.charWidth('0') * digits;
 			Insets insets = this.getInsets();
 			int preferredWidth = insets.left + insets.right + width;
@@ -173,7 +171,7 @@ public class LineNumbersRuler extends JPanel implements CaretListener, DocumentL
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		final FontMetrics fontMetrics = this.getFontMetrics(SyntaxStyle.FONT);
+		final FontMetrics fontMetrics = this.getFontMetrics(font);
 		final Insets insets = this.getInsets();
 		final int currentLine = getLineNumber(this.editor, this.editor.getCaretPosition());
 

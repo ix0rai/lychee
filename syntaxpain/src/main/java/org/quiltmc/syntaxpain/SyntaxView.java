@@ -44,7 +44,7 @@ public class SyntaxView extends PlainView {
 	@Override
 	protected float drawUnselectedText(Graphics2D graphics, float x, float y, int p0, int p1) {
 		setRenderingHits(graphics);
-		Font saveFont = SyntaxStyle.FONT;
+		Font saveFont = this.styles.font();
 		Color saveColor = graphics.getColor();
 		SyntaxDocument doc = (SyntaxDocument) this.getDocument();
 		Segment segment = this.getLineBuffer();

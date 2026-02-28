@@ -9,11 +9,13 @@ import java.util.Map;
 
 public class SyntaxStyleMap {
 	private final Map<TokenType, SyntaxStyle> styles;
+	private final Font font;
 
 	public SyntaxStyleMap(
-			Color highlight, Color string, Color number, Color operator, Color delimiter,
+			Font font, Color highlight, Color string, Color number, Color operator, Color delimiter,
 			Color type, Color identifier, Color comment, Color text, Color regex
 	) {
+		this.font = font;
 		this.styles = Map.ofEntries(
 			Map.entry(TokenType.KEYWORD, new SyntaxStyle(highlight, Font.PLAIN)),
 			Map.entry(TokenType.KEYWORD2, new SyntaxStyle(highlight, Font.BOLD + Font.ITALIC)),
@@ -40,6 +42,10 @@ public class SyntaxStyleMap {
 		return this.styles.get(type);
 	}
 
+	public Font font() {
+		return this.font;
+	}
+
 	/**
 	 * Draws the given Token. This will simply find the proper SyntaxStyle for
 	 * the TokenType and then asks the proper Style to draw the text of the Token.
@@ -51,6 +57,6 @@ public class SyntaxStyleMap {
 	public float drawText(
 			TokenType type, Segment segment, float x, float y, Graphics2D graphics, TabExpander e, int startOffset
 	) {
-		return this.getStyle(type).drawText(segment, x, y, graphics, e, startOffset);
+		return this.getStyle(type).drawText(this.font, segment, x, y, graphics, e, startOffset);
 	}
 }

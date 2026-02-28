@@ -23,11 +23,13 @@ import javax.swing.text.Element;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 import java.awt.Color;
+import java.awt.Font;
 
 public class ZestSyntaxKit extends DefaultEditorKit implements ViewFactory {
 	public static final String CONTENT_TYPE = "text/zest-sources";
 
 	private static SyntaxStyleMap styles = new SyntaxStyleMap(
+		Font.getFont(Font.MONOSPACED),
 		new Color(0x3333EE),
 		new Color(0xCC6600),
 		new Color(0x999933),
@@ -41,11 +43,11 @@ public class ZestSyntaxKit extends DefaultEditorKit implements ViewFactory {
 	);
 
 	public static void setSyntaxColors(
-			Color highlight, Color string, Color number, Color operator, Color delimiter,
+			Font font, Color highlight, Color string, Color number, Color operator, Color delimiter,
 			Color type, Color identifier, Color comment, Color text, Color regex
 	) {
 		styles = new SyntaxStyleMap(
-			highlight, string, number, operator, delimiter,
+			font, highlight, string, number, operator, delimiter,
 			type, identifier, comment, text, regex
 		);
 	}

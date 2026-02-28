@@ -25,7 +25,6 @@ public class SwingHelper {
 			throw new RuntimeException(e);
 		}
 
-		// todo duplicated in syntaxpain
 		try (InputStream is = SwingHelper.class.getResourceAsStream("/jbmono.ttf")) {
 			JBMONO = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
 
@@ -38,6 +37,7 @@ public class SwingHelper {
 
 		JEditorPane.registerEditorKitForContentType("text/zest-sources", ZestSyntaxKit.class.getName());
 		ZestSyntaxKit.setSyntaxColors(
+				SwingHelper.JBMONO,
 				LycheeColors.PINK,
 				LycheeColors.PINK,
 				LycheeColors.PINK,

@@ -31,16 +31,6 @@ import javax.swing.text.Utilities;
  * @author Ayman Al-Sairafi, Hanns Holger Rutz
  */
 public record SyntaxStyle(Color color, int fontStyle) {
-	// todo hack, duplicated font
-	public static final Font FONT;
-	static {
-		try (InputStream is = SyntaxStyle.class.getResourceAsStream("/jbmono.ttf")) {
-			FONT = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 12f);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	/**
 	 * Draw text.  This can directly call the Utilities.drawTabbedText.
 	 * Subclasses can override this method to provide any other decorations.
@@ -53,8 +43,8 @@ public record SyntaxStyle(Color color, int fontStyle) {
 	 *                    expanded as a space character.
 	 * @param startOffset - starting offset of the text in the document &gt;= 0
 	 */
-	public float drawText(Segment segment, float x, float y, Graphics2D graphics, TabExpander e, int startOffset) {
-		graphics.setFont(FONT.deriveFont(this.fontStyle()));
+	public float drawText(Font font, Segment segment, float x, float y, Graphics2D graphics, TabExpander e, int startOffset) {
+		graphics.setFont(font.deriveFont(this.fontStyle()));
 		FontMetrics fontMetrics = graphics.getFontMetrics();
 		int a = fontMetrics.getAscent();
 		int h = a + fontMetrics.getDescent();
