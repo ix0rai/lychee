@@ -13,6 +13,8 @@ Lychee is useful for a few different applications:
 - Learning to code
 - Providing a more intuitive alternative to SVG
 
+Lychee was built in 24 hours by [@ix0rai](https://github.com/ix0rai) and [@goshikito](https://github.com/goshikito) at [devhacks 2026](https://devclub.ca/devhacks/2026), where it won the Rookie of the Year Award (best first-time hackathon participants) and the Master of Devhacks Award (best overall).
+
 ## Usage
 Run using Gradle:
 ```bash
